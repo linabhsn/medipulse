@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CHUSys Command — Moroccan hospital clinical, predictive staffing, biomedical equipment and financial management platform powered by DeepSeek AI.">
-  <meta name="theme-color" content="#0d9488">
+  <meta name="description" content="CHUSys Command — Moroccan hospital clinical, predictive staffing, biomedical equipment and financial management platform powered by DeepSeek AI & Google Gemma 4.">
+  <meta name="theme-color" content="#0891b2">
   <title>MediPulse CHUSys Command — Intelligent Hospital Management & AI Predictive Operations</title>
 
   <!-- Tailwind CSS -->
@@ -14,8 +14,8 @@
       darkMode: 'class',
       theme: { extend: {
         colors: {
-          brand: { 50:'#f0fdfa',100:'#ccfbf1',500:'#14b8a6',600:'#0d9488',700:'#0f766e',900:'#134e4a' },
-          slate: { 850:'#152033', 950:'#090d16' }
+          brand: { 50:'#ecfeff',100:'#cffafe',500:'#06b6d4',600:'#0891b2',700:'#0e7490',900:'#164e63' },
+          slate: { 850:'#1e293b', 950:'#0f172a' }
         },
         fontFamily: { sans: ['Inter','sans-serif'] }
       }}
@@ -33,84 +33,84 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #090d16; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
     .glass-panel {
-      background: rgba(15, 23, 42, 0.82);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
     .tab-btn.active {
-      background-color: rgba(20, 184, 166, 0.15);
-      color: #2dd4bf;
-      border-bottom: 2px solid #14b8a6;
+      background-color: rgba(6, 182, 212, 0.1);
+      color: #22d3ee;
+      border-bottom: 2px solid #06b6d4;
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-teal-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
 
   <!-- ============================================================ -->
   <!-- HEADER                                                       -->
   <!-- ============================================================ -->
-  <header class="border-b border-slate-800 bg-slate-900/90 sticky top-0 z-40 backdrop-blur-md">
+  <header class="border-b border-slate-800 bg-slate-900/95 sticky top-0 z-40 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-teal-500/20 shrink-0">
-            <i class="fa-solid fa-hospital text-white text-xl"></i>
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 shrink-0">
+            <i class="fa-solid fa-hospital text-white text-lg"></i>
           </div>
           <div class="min-w-0">
-            <div class="flex items-center space-x-2">
-              <h1 class="font-bold text-lg tracking-tight text-white truncate">MediPulse <span class="text-teal-400 font-normal">CHUSys</span></h1>
-              <span class="bg-teal-500/10 text-teal-400 border border-teal-500/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase shrink-0">v2.4 DeepSeek Active</span>
-            </div>
-            <p class="text-xs text-slate-400 hidden sm:block truncate">Moroccan Hospital Clinical, Predictive Staffing, Machinery & Financial Platform</p>
+            <h1 class="font-bold text-lg tracking-tight text-white flex items-center gap-2">
+              MediPulse <span class="text-cyan-400 font-normal">CHUSys</span>
+            </h1>
           </div>
         </div>
-        <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
-          <!-- DeepSeek API Config -->
-          <button type="button" onclick="openApiKeyModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs px-2.5 py-2 rounded-lg font-semibold transition flex items-center space-x-1.5">
+        
+        <div class="flex items-center space-x-3 shrink-0">
+          <!-- AI Provider Switcher -->
+          <div class="flex items-center bg-slate-800 rounded-lg border border-slate-700 p-0.5">
+            <button type="button" onclick="setAiProvider('deepseek')" id="btnProviderDeepSeek" class="text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition bg-cyan-600 text-white shadow-sm">
+              DeepSeek
+            </button>
+            <button type="button" onclick="setAiProvider('gemma')" id="btnProviderGemma" class="text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition text-slate-400 hover:text-white">
+              Gemma 4
+            </button>
+          </div>
+
+          <button type="button" onclick="openApiKeyModal()" title="Configure API Keys" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs px-3 py-2 rounded-lg font-semibold transition flex items-center space-x-2">
             <i class="fa-solid fa-key text-amber-400"></i>
-            <span class="hidden lg:inline">DeepSeek API Key</span>
+            <span class="hidden sm:inline">API Keys</span>
           </button>
-          <button type="button" onclick="openAddEquipmentModal()" class="bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 border border-amber-500/30 text-xs px-3 py-2 rounded-lg font-semibold transition flex items-center space-x-1.5">
-            <i class="fa-solid fa-gears text-amber-400"></i><span class="hidden lg:inline">+ Add Equipment</span>
-          </button>
-          <button type="button" onclick="openAddStaffModal()" class="bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-xs px-3 py-2 rounded-lg font-semibold transition flex items-center space-x-1.5">
-            <i class="fa-solid fa-user-doctor text-indigo-400"></i><span class="hidden lg:inline">+ Add Doctor</span>
-          </button>
+          
           <button type="button" onclick="toggleAdminModeBtn()" id="adminToggleBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs px-3 py-2 rounded-lg font-semibold transition flex items-center space-x-2">
             <i id="adminLockIcon" class="fa-solid fa-lock text-amber-400"></i>
-            <span id="adminBtnLabel" class="hidden md:inline">Admin Portal (PIN: 1234)</span>
-          </button>
-          <div class="h-6 w-px bg-slate-800 hidden sm:block"></div>
-          <button type="button" onclick="switchTab('dispatchTab')" class="bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 text-xs px-3.5 py-2 rounded-lg font-semibold transition flex items-center space-x-2 shadow-lg shadow-rose-950/40 animate-pulse">
-            <i class="fa-solid fa-triangle-exclamation text-rose-400"></i><span class="hidden md:inline">Code Red Broadcast</span>
+            <span id="adminBtnLabel" class="hidden md:inline">Admin Portal</span>
           </button>
         </div>
       </div>
-      <nav class="flex space-x-1 sm:space-x-3 border-t border-slate-800/60 pt-1 overflow-x-auto no-scrollbar">
-        <button type="button" onclick="switchTab('forecastTab')" id="btn-forecastTab" class="tab-btn active px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
-          <i class="fa-solid fa-brain text-teal-400"></i><span>DeepSeek AI Forecast</span>
+      
+      <nav class="flex space-x-1 sm:space-x-2 border-t border-slate-800/60 pt-1 overflow-x-auto no-scrollbar">
+        <button type="button" onclick="switchTab('forecastTab')" id="btn-forecastTab" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
+          <i class="fa-solid fa-brain text-cyan-400"></i><span>AI Forecast</span>
         </button>
-        <button type="button" onclick="switchTab('patientsTab')" id="btn-patientsTab" class="tab-btn px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
-          <i class="fa-solid fa-hospital-patient text-sky-400"></i><span>Patient Records & Ledger</span>
+        <button type="button" onclick="switchTab('patientsTab')" id="btn-patientsTab" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
+          <i class="fa-solid fa-hospital-patient text-cyan-400"></i><span>Patients</span>
         </button>
-        <button type="button" onclick="switchTab('equipmentTab')" id="btn-equipmentTab" class="tab-btn px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap relative">
-          <i class="fa-solid fa-laptop-medical text-amber-400"></i><span>Equipment & Machinery</span>
-          <span id="equipmentRepairBadge" class="ml-1 px-1.5 py-0.2 bg-rose-500/20 text-rose-300 text-[10px] font-bold rounded-full border border-rose-500/30 animate-pulse">2 Repairs</span>
+        <button type="button" onclick="switchTab('equipmentTab')" id="btn-equipmentTab" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap relative">
+          <i class="fa-solid fa-laptop-medical text-cyan-400"></i><span>Equipment</span>
+          <span id="equipmentRepairBadge" class="ml-1 px-1.5 py-0.2 bg-rose-500/20 text-rose-300 text-[10px] font-bold rounded-full border border-rose-500/30 animate-pulse">2</span>
         </button>
-        <button type="button" onclick="switchTab('staffTab')" id="btn-staffTab" class="tab-btn px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
-          <i class="fa-solid fa-user-nurse text-indigo-400"></i><span>Staff Roster & Shift Tracker</span>
+        <button type="button" onclick="switchTab('staffTab')" id="btn-staffTab" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
+          <i class="fa-solid fa-user-nurse text-cyan-400"></i><span>Staff Roster</span>
           <span id="unassignedCountBadge" class="ml-1 px-1.5 py-0.2 bg-rose-500/20 text-rose-300 text-[10px] font-bold rounded-full border border-rose-500/30">1</span>
         </button>
-        <button type="button" onclick="switchTab('dispatchTab')" id="btn-dispatchTab" class="tab-btn px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
-          <i class="fa-solid fa-phone-volume text-rose-400"></i><span>Emergency Dispatch</span>
+        <button type="button" onclick="switchTab('dispatchTab')" id="btn-dispatchTab" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
+          <i class="fa-solid fa-phone-volume text-rose-400"></i><span>Emergency</span>
         </button>
-        <button type="button" onclick="switchTab('judgeTab')" id="btn-judgeTab" class="tab-btn px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
-          <i class="fa-solid fa-terminal text-teal-400"></i><span class="text-teal-400 font-semibold">Judge Console</span>
+        <button type="button" onclick="switchTab('judgeTab')" id="btn-judgeTab" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
+          <i class="fa-solid fa-terminal text-cyan-400"></i><span class="text-cyan-400 font-semibold">Judge Console</span>
         </button>
       </nav>
     </div>
@@ -121,27 +121,26 @@
   <!-- ============================================================ -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-    <div id="adminModeBanner" class="hidden bg-amber-500/10 border border-amber-500/30 p-3 rounded-xl flex items-center justify-between">
+    <div id="adminModeBanner" class="hidden bg-cyan-900/20 border border-cyan-500/30 p-3 rounded-xl flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs shrink-0">
+        <span class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs shrink-0">
           <i class="fa-solid fa-user-shield"></i>
         </span>
         <div>
-          <h4 class="text-xs font-bold text-amber-300 uppercase tracking-wider">Admin Portal Access Active</h4>
+          <h4 class="text-xs font-bold text-cyan-300 uppercase tracking-wider">Admin Portal Access Active</h4>
           <p class="text-[11px] text-slate-300">Unlocked: machinery registration, database ingestion, newborn registrations, and doctor onboarding.</p>
         </div>
       </div>
       <div class="flex items-center space-x-2">
-        <button type="button" onclick="openAddEquipmentModal()" class="text-xs bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg font-semibold transition shadow-md">+ Register Machine</button>
-        <button type="button" onclick="openAddStaffModal()" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-lg font-semibold transition shadow-md">+ Register Doctor</button>
-        <button type="button" onclick="lockAdminMode()" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-300 px-3 py-1.5 rounded-lg border border-slate-700 font-semibold transition">Exit Admin</button>
+        <button type="button" onclick="openAddEquipmentModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded-lg font-semibold transition border border-slate-700">+ Register Machine</button>
+        <button type="button" onclick="openAddStaffModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded-lg font-semibold transition border border-slate-700">+ Register Doctor</button>
+        <button type="button" onclick="lockAdminMode()" class="text-xs bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 px-3 py-1.5 rounded-lg border border-rose-500/30 font-semibold transition">Exit Admin</button>
       </div>
     </div>
 
     <!-- ==================== TAB 1: FORECAST ==================== -->
     <section id="forecastTab" class="tab-content space-y-6">
       
-      <!-- Top Surge Banner -->
       <div id="statusAlertBanner" class="p-4 rounded-xl glass-panel border-l-4 border-amber-500 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all duration-300">
         <div class="flex items-start sm:items-center space-x-3">
           <div id="statusAlertIcon" class="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
@@ -157,11 +156,10 @@
         </div>
       </div>
 
-      <!-- Department Selector & DeepSeek AI Control Strip -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
         <div class="flex items-center space-x-3 w-full sm:w-auto">
           <label for="departmentSelect" class="text-xs font-semibold text-slate-400 uppercase tracking-wider shrink-0">Target Ward:</label>
-          <select id="departmentSelect" onchange="switchDepartment()" class="bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 block px-3 py-2 font-medium cursor-pointer transition w-full sm:w-auto">
+          <select id="departmentSelect" onchange="switchDepartment()" class="bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 block px-3 py-2 font-medium cursor-pointer transition w-full sm:w-auto">
             <option value="ER">Emergency Room (ER)</option>
             <option value="ICU">Intensive Care Unit (ICU)</option>
             <option value="Ward">General Ward</option>
@@ -174,37 +172,36 @@
             <i class="fa-solid fa-file-excel text-emerald-400"></i><span>Import Database</span>
           </button>
           <input type="file" id="dbFileInput" accept=".csv, .json, .xlsx, .xls" class="hidden" onchange="handleDatabaseImport(event)">
-          <button type="button" onclick="runSurgePrediction()" class="bg-gradient-to-r from-teal-500 to-sky-600 hover:from-teal-400 hover:to-sky-500 text-white text-xs px-4 py-2 rounded-lg font-bold transition shadow-md shadow-teal-500/20 flex items-center space-x-1.5">
-            <i class="fa-solid fa-bolt text-amber-300"></i><span>Execute DeepSeek AI Forecast</span>
+          <button type="button" onclick="runSurgePrediction()" class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs px-4 py-2 rounded-lg font-bold transition shadow-md shadow-cyan-500/20 flex items-center space-x-1.5">
+            <i class="fa-solid fa-bolt text-amber-300"></i><span>Execute Forecast</span>
           </button>
         </div>
       </div>
 
-      <!-- KPI Metrics Strip -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">7-Day Forecast Total</span>
-            <div class="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center"><i class="fa-solid fa-bed-pulse"></i></div>
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center"><i class="fa-solid fa-bed-pulse"></i></div>
           </div>
           <div class="mt-3 flex items-baseline justify-between">
             <h3 id="kpiForecastTotal" class="text-2xl font-bold text-white">0</h3>
             <span id="kpiTrendTag" class="text-xs font-semibold text-emerald-400 flex items-center"><i class="fa-solid fa-arrow-trend-up mr-1"></i> +8.4%</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">Projected patient admissions</p>
-          <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-emerald-500"></div>
         </div>
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Nurses Needed / Shift</span>
-            <div class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center"><i class="fa-solid fa-user-nurse"></i></div>
+            <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center"><i class="fa-solid fa-user-nurse"></i></div>
           </div>
           <div class="mt-3 flex items-baseline justify-between">
             <h3 id="kpiNursesNeeded" class="text-2xl font-bold text-white">0</h3>
             <span id="kpiNurseDeficit" class="text-xs font-semibold text-rose-400 flex items-center"><i class="fa-solid fa-circle-exclamation mr-1"></i> 0</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">Based on <span id="kpiNurseRatioTag" class="text-slate-300 font-medium">4:1</span> ratio</p>
-          <div class="absolute bottom-0 left-0 right-0 h-1 bg-sky-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-blue-500"></div>
         </div>
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
@@ -232,7 +229,6 @@
         </div>
       </div>
 
-      <!-- Main Forecast Chart & Rationale Panel -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 space-y-6 min-w-0">
           
@@ -240,20 +236,20 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800 gap-2">
               <div>
                 <div class="flex items-center space-x-2">
-                  <h3 class="font-bold text-base text-white">DeepSeek AI Time-Series Influx Pipeline</h3>
+                  <h3 class="font-bold text-base text-white">AI Influx Pipeline</h3>
                   <span id="badgeModelSource" class="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[11px] px-2 py-0.5 rounded font-mono">Model: DeepSeek AI</span>
+                  <span id="badgeDataSource" title="Simulated baseline — import your own CSV/XLSX/JSON to replace" class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] px-2 py-0.5 rounded font-mono">Data: Simulated</span>
                 </div>
-                <p class="text-xs text-slate-400 mt-0.5">Historical patient actuals vs predictive open-weight AI forecast</p>
+                <p class="text-xs text-slate-400 mt-0.5">Historical actuals vs predictive open-weight AI forecast</p>
               </div>
               <div class="flex items-center space-x-3 text-xs font-medium shrink-0">
-                <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-teal-500 inline-block mr-1.5"></span> Historical</span>
-                <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-sky-400 inline-block mr-1.5 border border-dashed border-sky-200"></span> AI Prediction</span>
+                <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-cyan-500 inline-block mr-1.5"></span> Historical</span>
+                <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-blue-400 inline-block mr-1.5 border border-dashed border-blue-200"></span> AI Prediction</span>
               </div>
             </div>
 
-            <!-- DeepSeek Reasoning Banner -->
-            <div id="deepseekRationaleBox" class="mt-3 p-3 bg-teal-950/30 rounded-xl border border-teal-500/30 text-xs space-y-1">
-              <span class="font-bold text-teal-300 flex items-center"><i class="fa-solid fa-comment-medical mr-1.5"></i> DeepSeek Clinical Rationale:</span>
+            <div id="deepseekRationaleBox" class="mt-3 p-3 bg-cyan-950/30 rounded-xl border border-cyan-500/30 text-xs space-y-1">
+              <span class="font-bold text-cyan-300 flex items-center"><i class="fa-solid fa-comment-medical mr-1.5"></i> AI Clinical Rationale:</span>
               <p id="deepseekRationaleText" class="text-slate-300 leading-relaxed">Initialized. Executing 7-day velocity weighting and anomaly adjustments...</p>
             </div>
 
@@ -266,9 +262,9 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
               <div>
                 <h3 class="font-bold text-base text-white">7-Day Shift Roster Recommendations</h3>
-                <p class="text-xs text-slate-400">Optimized healthcare workforce requirements per daily shift cycle</p>
+                <p class="text-xs text-slate-400">Optimized workforce requirements per daily shift cycle</p>
               </div>
-              <button type="button" onclick="exportForecastCSV()" class="text-xs bg-slate-800 hover:bg-slate-700 text-teal-400 border border-slate-700 px-3 py-1.5 rounded-lg transition flex items-center space-x-1.5 font-medium shrink-0 self-start sm:self-auto">
+              <button type="button" onclick="exportForecastCSV()" class="text-xs bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 px-3 py-1.5 rounded-lg transition flex items-center space-x-1.5 font-medium shrink-0 self-start sm:self-auto">
                 <i class="fa-solid fa-download"></i><span>Export Roster CSV</span>
               </button>
             </div>
@@ -291,32 +287,32 @@
         </div>
 
         <div class="space-y-6">
-          <div class="glass-panel rounded-2xl p-5 border-t-2 border-teal-500 space-y-5">
+          <div class="glass-panel rounded-2xl p-5 border-t-2 border-cyan-500 space-y-5">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
               <div class="flex items-center space-x-2">
-                <i class="fa-solid fa-sliders text-teal-400"></i>
+                <i class="fa-solid fa-sliders text-cyan-400"></i>
                 <h3 class="font-bold text-base text-white">Workload Parameters</h3>
               </div>
-              <button type="button" onclick="resetSlidersToDefaults()" class="text-[11px] text-slate-400 hover:text-teal-400 transition underline">Reset Defaults</button>
+              <button type="button" onclick="resetSlidersToDefaults()" class="text-[11px] text-slate-400 hover:text-cyan-400 transition underline">Reset Defaults</button>
             </div>
             <div class="space-y-2">
               <div class="flex justify-between items-center text-xs">
-                <label for="nurseRatioSlider" class="font-medium text-slate-300 flex items-center"><i class="fa-solid fa-user-nurse text-sky-400 mr-1.5"></i> Patient-to-Nurse Ratio</label>
-                <span id="nurseRatioVal" class="font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">4:1</span>
+                <label for="nurseRatioSlider" class="font-medium text-slate-300 flex items-center"><i class="fa-solid fa-user-nurse text-blue-400 mr-1.5"></i> Patient-to-Nurse Ratio</label>
+                <span id="nurseRatioVal" class="font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">4:1</span>
               </div>
-              <input type="range" id="nurseRatioSlider" min="1" max="10" step="1" value="4" oninput="updateCalculations()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500">
+              <input type="range" id="nurseRatioSlider" min="1" max="10" step="1" value="4" oninput="updateCalculations()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
             </div>
             <div class="space-y-2">
               <div class="flex justify-between items-center text-xs">
                 <label for="doctorRatioSlider" class="font-medium text-slate-300 flex items-center"><i class="fa-solid fa-user-doctor text-indigo-400 mr-1.5"></i> Patient-to-Doctor Ratio</label>
                 <span id="doctorRatioVal" class="font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">12:1</span>
               </div>
-              <input type="range" id="doctorRatioSlider" min="4" max="25" step="1" value="12" oninput="updateCalculations()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500">
+              <input type="range" id="doctorRatioSlider" min="4" max="25" step="1" value="12" oninput="updateCalculations()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
             </div>
             <div class="space-y-2">
               <div class="flex justify-between items-center text-xs">
                 <label for="shiftLengthSelect" class="font-medium text-slate-300 flex items-center"><i class="fa-regular fa-clock text-amber-400 mr-1.5"></i> Target Shift Duration</label>
-                <select id="shiftLengthSelect" onchange="updateCalculations()" class="bg-slate-800 text-teal-400 border border-slate-700 text-xs font-bold rounded px-2 py-1">
+                <select id="shiftLengthSelect" onchange="updateCalculations()" class="bg-slate-800 text-cyan-400 border border-slate-700 text-xs font-bold rounded px-2 py-1">
                   <option value="8">8 Hours (3 Shifts/Day)</option>
                   <option value="12" selected>12 Hours (2 Shifts/Day)</option>
                 </select>
@@ -334,11 +330,11 @@
               <div class="grid grid-cols-2 gap-3">
                 <div>
                   <label for="scheduledNursesInput" class="text-[11px] text-slate-400 block mb-1">Scheduled Nurses</label>
-                  <input type="number" id="scheduledNursesInput" value="11" min="0" onchange="updateCalculations()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white font-semibold focus:ring-1 focus:ring-teal-500">
+                  <input type="number" id="scheduledNursesInput" value="11" min="0" onchange="updateCalculations()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white font-semibold focus:ring-1 focus:ring-cyan-500">
                 </div>
                 <div>
                   <label for="scheduledDoctorsInput" class="text-[11px] text-slate-400 block mb-1">Scheduled Doctors</label>
-                  <input type="number" id="scheduledDoctorsInput" value="4" min="0" onchange="updateCalculations()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white font-semibold focus:ring-1 focus:ring-teal-500">
+                  <input type="number" id="scheduledDoctorsInput" value="4" min="0" onchange="updateCalculations()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white font-semibold focus:ring-1 focus:ring-cyan-500">
                 </div>
               </div>
             </div>
@@ -346,13 +342,13 @@
 
           <div class="glass-panel rounded-2xl p-5 space-y-3">
             <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center">
-              <i class="fa-solid fa-circle-info text-teal-400 mr-2"></i> Department Profile
+              <i class="fa-solid fa-circle-info text-cyan-400 mr-2"></i> Department Profile
             </h4>
             <p id="deptPresetDescription" class="text-xs text-slate-400 leading-relaxed">Emergency Room departments experience high volatility with morning and late-evening admission spikes.</p>
             <div class="bg-slate-900/80 rounded-xl p-3 border border-slate-800 space-y-2 text-xs">
               <div class="flex justify-between"><span class="text-slate-400">Peak Surge Hours:</span><span id="deptPeakHours" class="font-medium text-slate-200">14:00 - 22:00</span></div>
               <div class="flex justify-between"><span class="text-slate-400">Bed Turnaround:</span><span id="deptTurnaround" class="font-medium text-slate-200">4.2 Hours</span></div>
-              <div class="flex justify-between"><span class="text-slate-400">Safety Buffer:</span><span id="deptSafetyBuffer" class="font-medium text-teal-400">+15% Capacity</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Safety Buffer:</span><span id="deptSafetyBuffer" class="font-medium text-cyan-400">+15% Capacity</span></div>
             </div>
           </div>
         </div>
@@ -365,14 +361,14 @@
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Active Admitted Patients</span>
-            <div class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center"><i class="fa-solid fa-bed-pulse"></i></div>
+            <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center"><i class="fa-solid fa-bed-pulse"></i></div>
           </div>
           <div class="mt-3 flex items-baseline justify-between">
             <h3 id="statTotalPatients" class="text-2xl font-bold text-white">0</h3>
-            <span class="text-xs font-semibold text-sky-400">Current Occupancy</span>
+            <span class="text-xs font-semibold text-blue-400">Current Occupancy</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">Across ICU, ER, Surgery, Peds & Ward</p>
-          <div class="absolute bottom-0 left-0 right-0 h-1 bg-sky-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-blue-500"></div>
         </div>
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
@@ -389,14 +385,14 @@
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Insurance Coverage</span>
-            <div class="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center"><i class="fa-solid fa-building-shield"></i></div>
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center"><i class="fa-solid fa-building-shield"></i></div>
           </div>
           <div class="mt-3 flex items-baseline justify-between">
-            <h3 id="statInsurancePaid" class="text-2xl font-bold text-teal-400">0 MAD</h3>
-            <span class="text-xs font-semibold text-teal-400">Covered</span>
+            <h3 id="statInsurancePaid" class="text-2xl font-bold text-cyan-400">0 MAD</h3>
+            <span class="text-xs font-semibold text-cyan-400">Covered</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">CNSS, CNOPS, AXA, Sanlam, RMA</p>
-          <div class="absolute bottom-0 left-0 right-0 h-1 bg-teal-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-cyan-500"></div>
         </div>
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
@@ -415,11 +411,11 @@
       <div class="glass-panel rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="relative w-full md:w-80">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-          <input type="text" id="patientSearchInput" oninput="filterPatients()" placeholder="Search Patient #, Name, Diagnosis, Insurance..." class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
+          <input type="text" id="patientSearchInput" oninput="filterPatients()" placeholder="Search Patient #, Name, Diagnosis..." class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500">
         </div>
         <div class="flex items-center space-x-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
           <span class="text-xs text-slate-400 font-medium mr-1 shrink-0">Filter:</span>
-          <button type="button" onclick="filterPatientDept('ALL', event)" class="patient-dept-btn active px-3 py-1.5 rounded-lg text-xs font-medium bg-teal-500/20 text-teal-300 border border-teal-500/30">All</button>
+          <button type="button" onclick="filterPatientDept('ALL', event)" class="patient-dept-btn active px-3 py-1.5 rounded-lg text-xs font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">All</button>
           <button type="button" onclick="filterPatientDept('NEWBORN', event)" class="patient-dept-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-purple-400 hover:text-purple-300 border border-slate-700"><i class="fa-solid fa-baby mr-1"></i> Newborns</button>
           <button type="button" onclick="filterPatientDept('ICU', event)" class="patient-dept-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-700">ICU</button>
           <button type="button" onclick="filterPatientDept('ER', event)" class="patient-dept-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-700">ER</button>
@@ -428,8 +424,8 @@
           <button type="button" onclick="filterPatientDept('Ward', event)" class="patient-dept-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-700">Ward</button>
         </div>
         <div class="flex items-center space-x-2 shrink-0">
-          <button type="button" onclick="openRegistrationModal()" class="bg-teal-600 hover:bg-teal-500 text-white text-xs px-3.5 py-2 rounded-xl font-semibold transition flex items-center space-x-1.5 shadow-lg shadow-teal-600/20">
-            <i class="fa-solid fa-user-plus"></i><span>+ Register Patient / Newborn</span>
+          <button type="button" onclick="openRegistrationModal()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3.5 py-2 rounded-xl font-semibold transition flex items-center space-x-1.5 shadow-lg shadow-cyan-600/20">
+            <i class="fa-solid fa-user-plus"></i><span>+ Register Patient</span>
           </button>
         </div>
       </div>
@@ -458,14 +454,14 @@
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Equipment Tracked</span>
-            <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center"><i class="fa-solid fa-laptop-medical"></i></div>
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center"><i class="fa-solid fa-laptop-medical"></i></div>
           </div>
           <div class="mt-3 flex items-baseline justify-between">
             <h3 id="statTotalEquipment" class="text-2xl font-bold text-white">0</h3>
             <span class="text-xs font-semibold text-slate-400">Rooms & OR Suites</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">Monitors, Ventilators, Pumps & Lasers</p>
-          <div class="absolute bottom-0 left-0 right-0 h-1 bg-amber-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-cyan-500"></div>
         </div>
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
@@ -508,15 +504,15 @@
       <div class="glass-panel rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="relative w-full md:w-80">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-          <input type="text" id="equipmentSearchInput" oninput="filterEquipment()" placeholder="Search Machine ID, Name, Serial, Room..." class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <input type="text" id="equipmentSearchInput" oninput="filterEquipment()" placeholder="Search Machine ID, Name, Serial..." class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500">
         </div>
         <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
           <span class="text-xs text-slate-400 font-medium mr-1">Location:</span>
-          <button type="button" onclick="filterEquipmentCategory('ALL', event)" class="eq-cat-btn active px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-500/20 text-amber-300 border border-amber-500/30">All</button>
+          <button type="button" onclick="filterEquipmentCategory('ALL', event)" class="eq-cat-btn active px-3 py-1.5 rounded-lg text-xs font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">All</button>
           <button type="button" onclick="filterEquipmentCategory('Patient Room', event)" class="eq-cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-700"><i class="fa-solid fa-bed mr-1"></i> Patient Rooms</button>
           <button type="button" onclick="filterEquipmentCategory('Operating Room', event)" class="eq-cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-700"><i class="fa-solid fa-scalpel mr-1"></i> Operating Rooms</button>
           <span class="text-xs text-slate-400 font-medium ml-2 mr-1">Status:</span>
-          <select id="equipmentStatusFilter" onchange="filterEquipment()" class="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-amber-500">
+          <select id="equipmentStatusFilter" onchange="filterEquipment()" class="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-cyan-500">
             <option value="ALL">All Statuses</option>
             <option value="Operational">Operational Only</option>
             <option value="Needs Repair">Needs Repair Only</option>
@@ -524,8 +520,8 @@
           </select>
         </div>
         <div class="flex items-center space-x-2 shrink-0">
-          <button type="button" onclick="openAddEquipmentModal()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs px-3.5 py-2 rounded-xl font-bold transition flex items-center space-x-1.5 shadow-lg shadow-amber-600/20">
-            <i class="fa-solid fa-plus"></i><span>Register New Machine</span>
+          <button type="button" onclick="openAddEquipmentModal()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs px-3.5 py-2 rounded-xl font-bold transition flex items-center space-x-1.5 border border-slate-700">
+            <i class="fa-solid fa-plus text-cyan-400"></i><span>Register Machine</span>
           </button>
         </div>
       </div>
@@ -537,7 +533,7 @@
     <section id="staffTab" class="tab-content hidden space-y-6">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div class="glass-panel rounded-xl p-4 flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-users text-lg"></i></div>
+          <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-users text-lg"></i></div>
           <div class="min-w-0"><span class="text-xs text-slate-400 uppercase tracking-wider block truncate">Total Roster</span><span id="statTotalStaff" class="text-xl font-bold text-white truncate">0</span></div>
         </div>
         <div class="glass-panel rounded-xl p-4 flex items-center space-x-3">
@@ -557,17 +553,17 @@
       <div class="glass-panel rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="relative w-full md:w-80">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-          <input type="text" id="staffSearchInput" oninput="filterStaff()" placeholder="Search Name, Role, Specialty..." class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
+          <input type="text" id="staffSearchInput" oninput="filterStaff()" placeholder="Search Name, Role, Specialty..." class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500">
         </div>
         <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
           <span class="text-xs text-slate-400 font-medium mr-1">Role:</span>
-          <select id="staffRoleFilter" onchange="filterStaff()" class="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-teal-500">
+          <select id="staffRoleFilter" onchange="filterStaff()" class="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-cyan-500">
             <option value="ALL">All Roles</option>
             <option value="Doctor">Doctors Only</option>
             <option value="Nurse">Nurses Only</option>
           </select>
           <span class="text-xs text-slate-400 font-medium ml-2 mr-1">Status:</span>
-          <select id="staffStatusFilter" onchange="filterStaff()" class="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-teal-500">
+          <select id="staffStatusFilter" onchange="filterStaff()" class="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-cyan-500">
             <option value="ALL">All Statuses</option>
             <option value="Checked In">Checked In</option>
             <option value="Shift Not Checked-In">Not Checked In</option>
@@ -575,8 +571,8 @@
           </select>
         </div>
         <div class="flex items-center space-x-2 shrink-0">
-          <button type="button" onclick="openAddStaffModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3.5 py-2 rounded-xl font-bold transition flex items-center space-x-1.5 shadow-lg shadow-indigo-600/20">
-            <i class="fa-solid fa-user-plus"></i><span>Add Doctor / Staff</span>
+          <button type="button" onclick="openAddStaffModal()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs px-3.5 py-2 rounded-xl font-bold transition flex items-center space-x-1.5 border border-slate-700">
+            <i class="fa-solid fa-user-plus text-cyan-400"></i><span>Add Staff</span>
           </button>
         </div>
       </div>
@@ -592,11 +588,11 @@
             <div class="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center shrink-0"><i class="fa-solid fa-bullhorn text-2xl animate-bounce"></i></div>
             <div>
               <h3 class="text-lg font-bold text-white">Emergency Staff Callout Broadcast Protocol</h3>
-              <p class="text-xs text-slate-300 mt-0.5">Instantly dispatch automated SMS, push alerts, and direct call alerts to all active on-duty Moroccan clinical personnel.</p>
+              <p class="text-xs text-slate-300 mt-0.5">Instantly dispatch automated SMS, push alerts, and direct call alerts to all active on-duty clinical personnel.</p>
             </div>
           </div>
           <button type="button" onclick="triggerEmergencyBroadcast()" class="bg-rose-600 hover:bg-rose-500 text-white text-xs px-5 py-3 rounded-xl font-bold transition shadow-xl shadow-rose-600/30 flex items-center space-x-2 shrink-0">
-            <i class="fa-solid fa-tower-broadcast text-sm"></i><span>BROADCAST EMERGENCY ALERT</span>
+            <i class="fa-solid fa-tower-broadcast text-sm"></i><span>BROADCAST ALERT</span>
           </button>
         </div>
       </div>
@@ -606,7 +602,7 @@
             <h3 class="font-bold text-base text-white">Active On-Duty Emergency Contact Directory (+212)</h3>
             <p class="text-xs text-slate-400">Direct phone dialing and email shortcuts for currently checked-in clinical staff</p>
           </div>
-          <span class="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-full border border-slate-700 font-mono">1-Tap Emergency Actions</span>
+          <span class="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-full border border-slate-700 font-mono">1-Tap Actions</span>
         </div>
         <div id="emergencyDispatchGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
       </div>
@@ -614,34 +610,33 @@
 
     <!-- ==================== TAB 6: JUDGE CONSOLE ==================== -->
     <section id="judgeTab" class="tab-content hidden space-y-6">
-      <div class="glass-panel rounded-2xl p-6 space-y-4 border border-teal-500/30">
+      <div class="glass-panel rounded-2xl p-6 space-y-4 border border-cyan-500/30">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
           <div>
-            <h3 class="font-bold text-teal-400 text-lg flex items-center gap-2">
+            <h3 class="font-bold text-cyan-400 text-lg flex items-center gap-2">
               <i class="fa-solid fa-terminal"></i>
-              <span>Judge Verification & DeepSeek Live Console</span>
+              <span>Judge Verification & AI Live Console</span>
             </h3>
-            <p class="text-xs text-slate-400">Verify code execution, open-weight DeepSeek API endpoints, and mathematical fallback logic.</p>
+            <p class="text-xs text-slate-400">Verify code execution, open-weight API endpoints, and mathematical fallback logic.</p>
           </div>
           <button type="button" onclick="clearConsoleLog()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg border border-slate-700">
             Clear Terminal
           </button>
         </div>
 
-        <!-- Terminal Log Area -->
         <div id="console-terminal" class="bg-black/90 p-4 rounded-xl border border-slate-800 font-mono text-xs text-emerald-400 h-64 overflow-y-auto space-y-1">
           <p class="text-slate-500">[System Ready] CHUSys Terminal Initialized...</p>
-          <p class="text-sky-400">&gt; Exposed global functions: window.fetchDeepSeekSurgePrediction(), window.executeLocalFallbackPrediction(), window.runSurgePrediction()</p>
+          <p class="text-cyan-400">&gt; Exposed global functions: window.fetchDeepSeekSurgePrediction(), window.fetchGemmaSurgePrediction(), window.executeLocalFallbackPrediction(), window.runSurgePrediction()</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-          <button type="button" onclick="testApiDirectly()" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 text-xs font-semibold text-sky-300 text-left">
-            ⚡ Test DeepSeek API Direct Call
+          <button type="button" onclick="testApiDirectly()" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 text-xs font-semibold text-cyan-300 text-left">
+            ⚡ Test Active AI Direct Call
           </button>
           <button type="button" onclick="testFallbackDirectly()" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 text-xs font-semibold text-emerald-300 text-left">
             📐 Test Fallback MA7 Formula
           </button>
-          <a href="https://github.com/linabhsn/bionics-GRP" target="_blank" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 text-xs font-semibold text-teal-300 flex items-center justify-between">
+          <a href="https://github.com/linabhsn/medipulse" target="_blank" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 text-xs font-semibold text-cyan-300 flex items-center justify-between">
             <span>📂 Open Repository on GitHub</span>
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
           </a>
@@ -656,28 +651,36 @@
   <!-- ============================================================ -->
   <div id="toastContainer" aria-live="polite" class="fixed bottom-5 right-5 z-50 space-y-3 max-w-sm"></div>
 
-  <!-- DeepSeek API Key Modal -->
+  <!-- API Key Modal -->
   <div id="apiKeyModal" role="dialog" aria-modal="true" aria-hidden="true" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="glass-panel bg-slate-900 border border-teal-500/40 w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4">
+    <div class="glass-panel bg-slate-900 border border-cyan-500/40 w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-3">
         <h3 class="font-bold text-white flex items-center gap-2">
           <i class="fa-solid fa-key text-amber-400"></i>
-          <span>DeepSeek API Configuration</span>
+          <span>AI API Configuration</span>
         </h3>
         <button type="button" onclick="closeApiKeyModal()" class="text-slate-400 hover:text-slate-200">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <p class="text-xs text-slate-300 leading-relaxed">
-        Input your DeepSeek API key to target <code class="text-sky-300">https://api.deepseek.com/v1/chat/completions</code>. If omitted, CHUSys automatically executes the local mathematical MA7 fallback engine.
-      </p>
-      <div>
-        <label for="deepseekApiKeyInput" class="block text-xs font-semibold text-slate-300 mb-1">API Key</label>
-        <input type="password" id="deepseekApiKeyInput" placeholder="sk-..." class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono">
+      
+      <div class="space-y-3">
+        <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-700">
+          <label for="deepseekApiKeyInput" class="block text-xs font-bold text-cyan-300 mb-1 flex items-center gap-2"><i class="fa-solid fa-brain"></i> DeepSeek API Key</label>
+          <input type="password" id="deepseekApiKeyInput" placeholder="sk-..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono focus:ring-1 focus:ring-cyan-500">
+          <p class="text-[10px] text-slate-400 mt-1">Targets api.deepseek.com</p>
+        </div>
+        
+        <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-700">
+          <label for="geminiApiKeyInput" class="block text-xs font-bold text-purple-300 mb-1 flex items-center gap-2"><i class="fa-solid fa-gem"></i> Google Gemini API Key (for Gemma)</label>
+          <input type="password" id="geminiApiKeyInput" placeholder="AIza..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono focus:ring-1 focus:ring-purple-500">
+          <p class="text-[10px] text-slate-400 mt-1">Get a free key at aistudio.google.com</p>
+        </div>
       </div>
+
       <div class="flex justify-end space-x-2 pt-2">
         <button type="button" onclick="closeApiKeyModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded-xl font-semibold transition">Cancel</button>
-        <button type="button" onclick="saveApiKey()" class="bg-teal-600 hover:bg-teal-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition">Save Key</button>
+        <button type="button" onclick="saveApiKeys()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition">Save Keys</button>
       </div>
     </div>
   </div>
@@ -694,7 +697,7 @@
       </div>
       <div class="space-y-2">
         <label for="adminPinInput" class="text-xs font-semibold text-slate-300">Admin Security PIN (Demo: 1234)</label>
-        <input type="password" id="adminPinInput" maxlength="6" inputmode="numeric" autocomplete="off" placeholder="Enter PIN" onkeydown="if(event.key==='Enter')verifyAdminPin()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-center text-lg tracking-widest text-teal-400 font-bold focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <input type="password" id="adminPinInput" maxlength="6" inputmode="numeric" autocomplete="off" placeholder="Enter PIN" onkeydown="if(event.key==='Enter')verifyAdminPin()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-center text-lg tracking-widest text-cyan-400 font-bold focus:outline-none focus:ring-2 focus:ring-amber-500">
         <p id="adminPinError" class="text-[11px] text-rose-400 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Incorrect Admin PIN. Try 1234.</p>
       </div>
       <div class="flex justify-end space-x-2 pt-2">
@@ -709,7 +712,7 @@
     <div class="glass-panel bg-slate-900 border border-slate-700 w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden max-h-[85vh] flex flex-col">
       <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/80 shrink-0">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-laptop-medical"></i></div>
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-laptop-medical"></i></div>
           <div>
             <h3 class="text-base font-bold text-white">Register New Medical Machinery</h3>
             <p class="text-xs text-slate-400">Onboard room monitors, ventilators, anesthesia & surgical equipment</p>
@@ -719,7 +722,7 @@
       </div>
       <form id="addEquipmentForm" onsubmit="handleAddEquipmentSubmit(event)" class="p-4 sm:p-6 space-y-4 overflow-y-auto text-xs text-slate-300">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div><label for="newEqName" class="block text-slate-400 font-medium mb-1">Equipment Name</label><input type="text" id="newEqName" required placeholder="e.g. Draeger Fabius Anesthesia" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-medium focus:ring-1 focus:ring-amber-500"></div>
+          <div><label for="newEqName" class="block text-slate-400 font-medium mb-1">Equipment Name</label><input type="text" id="newEqName" required placeholder="e.g. Draeger Fabius Anesthesia" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-medium focus:ring-1 focus:ring-cyan-500"></div>
           <div><label for="newEqCategory" class="block text-slate-400 font-medium mb-1">Location Category</label><select id="newEqCategory" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"><option value="Patient Room">Patient Room</option><option value="Operating Room">Operating Room (OR)</option></select></div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -741,7 +744,7 @@
         <div><label for="newEqEngineer" class="block text-slate-400 font-medium mb-1">Assigned Biomedical Engineer</label><input type="text" id="newEqEngineer" value="Ing. Hassan Alami (+212 661-889900)" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"></div>
         <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex justify-end space-x-2 shrink-0 pt-3">
           <button type="button" onclick="closeAddEquipmentModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded-xl font-semibold transition">Cancel</button>
-          <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition flex items-center space-x-1.5"><i class="fa-solid fa-check"></i><span>Register Machine</span></button>
+          <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition flex items-center space-x-1.5"><i class="fa-solid fa-check"></i><span>Register Machine</span></button>
         </div>
       </form>
     </div>
@@ -752,7 +755,7 @@
     <div class="glass-panel bg-slate-900 border border-slate-700 w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden max-h-[85vh] flex flex-col">
       <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/80 shrink-0">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-user-doctor"></i></div>
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-user-doctor"></i></div>
           <div>
             <h3 class="text-base font-bold text-white">Register New Doctor / Clinical Staff</h3>
             <p class="text-xs text-slate-400">Onboard physicians, specialist consultants, and charge nurses</p>
@@ -762,7 +765,7 @@
       </div>
       <form id="addStaffForm" onsubmit="handleAddStaffSubmit(event)" class="p-4 sm:p-6 space-y-4 overflow-y-auto text-xs text-slate-300">
         <div class="grid grid-cols-2 gap-3 bg-slate-950 p-2 rounded-xl border border-slate-800">
-          <label class="flex items-center justify-center space-x-2 p-2 rounded-lg cursor-pointer transition bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 font-bold" id="labelRoleDoctor">
+          <label class="flex items-center justify-center space-x-2 p-2 rounded-lg cursor-pointer transition bg-cyan-600/20 text-cyan-300 border border-cyan-500/30 font-bold" id="labelRoleDoctor">
             <input type="radio" name="newStaffType" value="Doctor" checked onchange="toggleStaffRoleType('Doctor')" class="hidden">
             <i class="fa-solid fa-user-doctor"></i><span>Medical Doctor</span>
           </label>
@@ -772,7 +775,7 @@
           </label>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div><label for="newStaffName" class="block text-slate-400 font-medium mb-1">Full Name & Title</label><input type="text" id="newStaffName" required placeholder="e.g. Dr. Fatima Zohra Bennis" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-medium focus:ring-1 focus:ring-teal-500"></div>
+          <div><label for="newStaffName" class="block text-slate-400 font-medium mb-1">Full Name & Title</label><input type="text" id="newStaffName" required placeholder="e.g. Dr. Fatima Zohra Bennis" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-medium focus:ring-1 focus:ring-cyan-500"></div>
           <div><label for="newStaffRoleLevel" class="block text-slate-400 font-medium mb-1">Position</label><select id="newStaffRoleLevel" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white">
             <option value="Attending Physician">Attending Physician</option>
             <option value="Senior Consultant Specialist">Senior Consultant Specialist</option>
@@ -799,7 +802,7 @@
         <div><label for="newStaffStatus" class="block text-slate-400 font-medium mb-1">Initial Status</label><select id="newStaffStatus" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold"><option value="Checked In">Checked In</option><option value="Shift Not Checked-In">Shift Not Checked-In</option><option value="On Break">On Break</option></select></div>
         <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex justify-end space-x-2 shrink-0 pt-3">
           <button type="button" onclick="closeAddStaffModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded-xl font-semibold transition">Cancel</button>
-          <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition flex items-center space-x-1.5"><i class="fa-solid fa-user-check"></i><span>Register Staff Member</span></button>
+          <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition flex items-center space-x-1.5"><i class="fa-solid fa-user-check"></i><span>Register Staff Member</span></button>
         </div>
       </form>
     </div>
@@ -810,7 +813,7 @@
     <div class="glass-panel bg-slate-900 border border-slate-700 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden max-h-[85vh] flex flex-col">
       <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/80 shrink-0">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 border border-teal-500/20 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-id-card"></i></div>
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-id-card"></i></div>
           <div>
             <h3 class="text-base font-bold text-white">Patient & Newborn Admission Portal</h3>
             <p class="text-xs text-slate-400">Register new hospital inpatients or newborn infant delivery records</p>
@@ -819,7 +822,7 @@
         <button type="button" onclick="closeRegistrationModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition"><i class="fa-solid fa-xmark text-sm"></i></button>
       </div>
       <div class="flex border-b border-slate-800 bg-slate-950/40 p-2 space-x-2 shrink-0">
-        <button type="button" onclick="setRegType('patient')" id="regTypePatientBtn" class="flex-1 py-2 text-xs font-bold rounded-lg bg-teal-500/20 text-teal-300 border border-teal-500/30 flex items-center justify-center space-x-2">
+        <button type="button" onclick="setRegType('patient')" id="regTypePatientBtn" class="flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-center space-x-2">
           <i class="fa-solid fa-user-plus"></i><span>Standard Inpatient</span>
         </button>
         <button type="button" onclick="setRegType('newborn')" id="regTypeNewbornBtn" class="flex-1 py-2 text-xs font-bold rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center space-x-2">
@@ -835,7 +838,7 @@
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div><label for="regBirthWeight" class="block text-slate-400 font-medium mb-1">Weight (kg)</label><input type="number" step="0.1" id="regBirthWeight" value="3.2" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"></div>
-            <div><label for="regApgarScore" class="block text-slate-400 font-medium mb-1">Apgar (0-10)</label><input type="number" min="0" max="10" id="regApgarScore" value="9" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold text-teal-400"></div>
+            <div><label for="regApgarScore" class="block text-slate-400 font-medium mb-1">Apgar (0-10)</label><input type="number" min="0" max="10" id="regApgarScore" value="9" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold text-cyan-400"></div>
             <div><label for="regGestationalAge" class="block text-slate-400 font-medium mb-1">Gestational Age</label><input type="text" id="regGestationalAge" value="38 Weeks" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"></div>
             <div><label for="regDeliveryMethod" class="block text-slate-400 font-medium mb-1">Delivery</label><select id="regDeliveryMethod" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-2 text-white">
               <option value="Spontaneous Vaginal">Vaginal</option><option value="Elective C-Section">Elective C-Section</option><option value="Emergency C-Section">Emergency C-Section</option><option value="Vacuum Assisted">Vacuum Assisted</option>
@@ -870,7 +873,7 @@
         </div>
         <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex justify-end space-x-2 shrink-0 pt-3">
           <button type="button" onclick="closeRegistrationModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded-xl font-semibold transition">Cancel</button>
-          <button type="submit" class="bg-teal-600 hover:bg-teal-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition"><i class="fa-solid fa-check mr-1.5"></i> Register Patient</button>
+          <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition"><i class="fa-solid fa-check mr-1.5"></i> Register Patient</button>
         </div>
       </form>
     </div>
@@ -881,11 +884,11 @@
     <div class="glass-panel bg-slate-900 border border-slate-700 w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden max-h-[85vh] flex flex-col">
       <div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/80 shrink-0">
         <div class="flex items-center space-x-3 min-w-0">
-          <div id="modalPatientBadge" class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 border border-teal-500/20 flex items-center justify-center font-bold text-xs shrink-0 tracking-wider text-center">#001</div>
+          <div id="modalPatientBadge" class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center font-bold text-xs shrink-0 tracking-wider text-center">#001</div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2 flex-wrap">
               <h3 id="modalPatientName" class="text-base sm:text-lg font-bold text-white truncate">Patient</h3>
-              <span id="modalPatientDept" class="bg-sky-500/10 text-sky-400 border border-sky-500/20 text-[10px] font-bold px-2 py-0.5 rounded uppercase shrink-0">ICU</span>
+              <span id="modalPatientDept" class="bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[10px] font-bold px-2 py-0.5 rounded uppercase shrink-0">ICU</span>
               <span id="modalPatientBlood" class="bg-rose-500/10 text-rose-300 border border-rose-500/20 text-[10px] font-bold px-2 py-0.5 rounded shrink-0">Blood: A+</span>
             </div>
             <p id="modalPatientSub" class="text-xs text-slate-400 mt-0.5 truncate">ID: --</p>
@@ -899,14 +902,14 @@
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
             <div><span class="text-slate-400 block text-[10px]">Mother ID:</span><strong id="modalMotherId" class="text-purple-300">--</strong></div>
             <div><span class="text-slate-400 block text-[10px]">Birth Weight:</span><strong id="modalBirthWeight" class="text-white">--</strong></div>
-            <div><span class="text-slate-400 block text-[10px]">Apgar Score:</span><strong id="modalApgarScore" class="text-teal-400 font-bold">--</strong></div>
+            <div><span class="text-slate-400 block text-[10px]">Apgar Score:</span><strong id="modalApgarScore" class="text-cyan-400 font-bold">--</strong></div>
             <div><span class="text-slate-400 block text-[10px]">Delivery Method:</span><strong id="modalDeliveryMethod" class="text-slate-200">--</strong></div>
           </div>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
           <div><span class="text-slate-500 block text-[10px] uppercase font-semibold">Heart Rate</span><span id="modalVitalHR" class="font-bold text-rose-400 text-sm">--</span></div>
-          <div><span class="text-slate-500 block text-[10px] uppercase font-semibold">Blood Pressure</span><span id="modalVitalBP" class="font-bold text-sky-400 text-sm">--</span></div>
-          <div><span class="text-slate-500 block text-[10px] uppercase font-semibold">Oxygen (SpO2)</span><span id="modalVitalSpO2" class="font-bold text-teal-400 text-sm">--</span></div>
+          <div><span class="text-slate-500 block text-[10px] uppercase font-semibold">Blood Pressure</span><span id="modalVitalBP" class="font-bold text-blue-400 text-sm">--</span></div>
+          <div><span class="text-slate-500 block text-[10px] uppercase font-semibold">Oxygen (SpO2)</span><span id="modalVitalSpO2" class="font-bold text-cyan-400 text-sm">--</span></div>
           <div><span class="text-slate-500 block text-[10px] uppercase font-semibold">Temperature</span><span id="modalVitalTemp" class="font-bold text-amber-400 text-sm">--</span></div>
         </div>
         <div class="space-y-2">
@@ -914,19 +917,19 @@
           <div id="modalEquipmentBox" class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 space-y-2"></div>
         </div>
         <div class="space-y-2">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-teal-400 flex items-center"><i class="fa-solid fa-file-medical mr-2"></i> Clinical History & Background</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center"><i class="fa-solid fa-file-medical mr-2"></i> Clinical History & Background</h4>
           <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800"><p id="modalMedicalHistory" class="text-slate-200 text-xs leading-relaxed">--</p></div>
         </div>
         <div class="space-y-2">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-teal-400 flex items-center"><i class="fa-solid fa-building-shield mr-2"></i> Insurance Provider & Coverage</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center"><i class="fa-solid fa-building-shield mr-2"></i> Insurance Provider & Coverage</h4>
           <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div><span class="text-[10px] text-slate-500 uppercase font-semibold block">Provider</span><span id="modalInsProvider" class="font-bold text-white text-xs block truncate">--</span><span id="modalInsPolicy" class="text-[11px] text-slate-400 block font-mono mt-0.5">Policy: --</span></div>
             <div><span class="text-[10px] text-slate-500 uppercase font-semibold block">Coverage Ratio</span><div class="flex items-center space-x-2 mt-0.5"><span id="modalInsCoverage" class="font-bold text-emerald-400 text-sm">--</span><span id="modalInsCopay" class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-300 font-semibold border border-slate-700">--</span></div></div>
-            <div><span class="text-[10px] text-slate-500 uppercase font-semibold block">Annual Cap</span><span id="modalInsMaxLimit" class="font-bold text-slate-200 text-xs block">--</span><span class="text-[10px] text-teal-400 block mt-0.5"><i class="fa-solid fa-circle-check"></i> Pre-Approved</span></div>
+            <div><span class="text-[10px] text-slate-500 uppercase font-semibold block">Annual Cap</span><span id="modalInsMaxLimit" class="font-bold text-slate-200 text-xs block">--</span><span class="text-[10px] text-cyan-400 block mt-0.5"><i class="fa-solid fa-circle-check"></i> Pre-Approved</span></div>
           </div>
         </div>
         <div class="space-y-2">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-sky-400 flex items-center"><i class="fa-solid fa-user-doctor mr-2"></i> Doctor Consultation Summary & Directives</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-blue-400 flex items-center"><i class="fa-solid fa-user-doctor mr-2"></i> Doctor Consultation Summary & Directives</h4>
           <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 space-y-3">
             <div><span class="text-[10px] text-slate-500 uppercase font-semibold block">Physician Findings</span><p id="modalDoctorSummary" class="text-slate-200 text-xs font-medium leading-relaxed mt-1">--</p></div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800/80">
@@ -964,7 +967,7 @@
         </div>
       </div>
       <div class="p-4 border-t border-slate-800 bg-slate-950/90 flex justify-between items-center shrink-0">
-        <span class="text-[11px] text-slate-400"><i class="fa-solid fa-lock text-teal-400 mr-1"></i> Encrypted Medical Record</span>
+        <span class="text-[11px] text-slate-400"><i class="fa-solid fa-lock text-cyan-400 mr-1"></i> Encrypted Medical Record</span>
         <button type="button" onclick="closePatientModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded-lg font-semibold transition">Close Record</button>
       </div>
     </div>
@@ -985,8 +988,9 @@
   <!-- ============================================================ -->
   <script>
     /**
-     * MediPulse CHUSys Platform & DeepSeek AI Engine
-     * Repository: https://github.com/linabhsn/bionics-GRP
+     * MediPulse CHUSys Platform
+     * DeepSeek AI & Google Gemma 4 via Gemini API
+     * Repository: https://github.com/linabhsn/medipulse
      * Authors: Lina Bouhsissin, Hamza Boumarg, Malak Jaouane
      */
 
@@ -996,7 +1000,9 @@
       COST_PER_SHIFT_MAD: 3800,
       DEFAULT_DEPT: "ER",
       DEEPSEEK_API_URL: "https://api.deepseek.com/v1/chat/completions",
-      DEEPSEEK_MODEL: "deepseek-chat"
+      DEEPSEEK_MODEL: "deepseek-chat",
+      GEMINI_API_BASE: "https://generativelanguage.googleapis.com/v1beta/models",
+      GEMMA_MODEL: "gemma-4-26b-a4b-it" // or "gemma-4-31b-it"
     };
 
     // State
@@ -1008,6 +1014,8 @@
     let selectedPatientDeptFilter = 'ALL';
     let selectedEquipmentCategoryFilter = 'ALL';
     let registrationType = 'patient';
+    let dataSource = 'simulated';
+    let activeAiProvider = 'deepseek'; // 'deepseek' or 'gemma'
 
     // Utilities
     const escapeHtml = (v) => v == null ? '' : String(v)
@@ -1016,6 +1024,21 @@
 
     const formatMAD = (n) => `${Math.round(Number(n) || 0).toLocaleString('en-US')} MAD`;
     const formatMAD2 = (n) => `${(Number(n) || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MAD`;
+
+    function setDataSourceBadge(type, fileName) {
+      dataSource = type;
+      const badge = document.getElementById('badgeDataSource');
+      if (!badge) return;
+      if (type === 'imported') {
+        badge.innerText = `Data: Imported (${fileName || 'file'})`;
+        badge.className = 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] px-2 py-0.5 rounded font-mono';
+        badge.title = `Imported from ${fileName || 'uploaded file'}`;
+      } else {
+        badge.innerText = 'Data: Simulated';
+        badge.className = 'bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] px-2 py-0.5 rounded font-mono';
+        badge.title = 'Simulated baseline — import your own CSV/XLSX/JSON to replace';
+      }
+    }
 
     function logTerminal(msg) {
       const term = document.getElementById("console-terminal");
@@ -1068,7 +1091,7 @@
       const c = document.getElementById('toastContainer');
       while (c.children.length >= 4) c.removeChild(c.firstElementChild);
       const t = document.createElement('div');
-      let border = 'border-teal-500/40 bg-slate-900', icon = 'fa-circle-check text-teal-400';
+      let border = 'border-cyan-500/40 bg-slate-900', icon = 'fa-circle-check text-cyan-400';
       if (type === 'amber') { border = 'border-amber-500/40 bg-slate-900'; icon = 'fa-triangle-exclamation text-amber-400'; }
       if (type === 'rose') { border = 'border-rose-500/40 bg-slate-900'; icon = 'fa-wrench text-rose-400'; }
       if (type === 'indigo') { border = 'border-indigo-500/40 bg-slate-900'; icon = 'fa-user-doctor text-indigo-400'; }
@@ -1079,13 +1102,34 @@
       setTimeout(() => { t.classList.add('opacity-0', 'translate-y-2'); setTimeout(() => t.remove(), 300); }, 4000);
     }
 
-    // DeepSeek API & Predictive Logic
+    // AI Provider Switcher
+    function setAiProvider(provider) {
+      activeAiProvider = provider;
+      const btnDeepSeek = document.getElementById('btnProviderDeepSeek');
+      const btnGemma = document.getElementById('btnProviderGemma');
+      
+      if (provider === 'gemma') {
+        btnGemma.className = 'text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition bg-purple-600 text-white shadow-sm';
+        btnDeepSeek.className = 'text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition text-slate-400 hover:text-white';
+        document.getElementById('badgeModelSource').innerText = `Model: Gemma 4 (Gemini API)`;
+        document.getElementById('badgeModelSource').className = 'bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[11px] px-2 py-0.5 rounded font-mono';
+      } else {
+        btnDeepSeek.className = 'text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition bg-cyan-600 text-white shadow-sm';
+        btnGemma.className = 'text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition text-slate-400 hover:text-white';
+        document.getElementById('badgeModelSource').innerText = `Model: DeepSeek AI`;
+        document.getElementById('badgeModelSource').className = 'bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[11px] px-2 py-0.5 rounded font-mono';
+      }
+      logTerminal(`Switched AI provider to ${provider === 'gemma' ? 'Google Gemma 4' : 'DeepSeek'}.`);
+      showToast('AI Provider Changed', `Active model: ${provider === 'gemma' ? 'Gemma 4 via Gemini API' : 'DeepSeek'}`, 'success');
+    }
+
+    // DeepSeek API Logic
     async function fetchDeepSeekSurgePrediction(histArray, dept) {
       logTerminal(`⚡ Requesting DeepSeek API... Target Dept: ${dept}`);
       const apiKey = localStorage.getItem("CHUSYS_DEEPSEEK_KEY");
 
       if (!apiKey) {
-        logTerminal("⚠️ No API Key found in LocalStorage. Routing request to Mathematical MA7 Fallback.");
+        logTerminal("⚠️ No DeepSeek API Key found. Routing to MA7 Fallback.");
         return executeLocalFallbackPrediction(histArray, dept);
       }
 
@@ -1123,7 +1167,70 @@
           source: "DeepSeek Open-Weight AI"
         };
       } catch (err) {
-        logTerminal(`⚠️ API Error (${err.message}). Falling back to local MA7 model.`);
+        logTerminal(`⚠️ DeepSeek API Error (${err.message}). Falling back to local MA7 model.`);
+        return executeLocalFallbackPrediction(histArray, dept);
+      }
+    }
+
+    // Gemma 4 via Gemini API Logic
+    async function fetchGemmaSurgePrediction(histArray, dept) {
+      logTerminal(`⚡ Requesting Gemma 4 via Gemini API... Target Dept: ${dept}`);
+      const apiKey = localStorage.getItem("CHUSYS_GEMINI_KEY");
+
+      if (!apiKey) {
+        logTerminal("⚠️ No Gemini API Key found. Routing to MA7 Fallback.");
+        return executeLocalFallbackPrediction(histArray, dept);
+      }
+
+      const url = `${CONFIG.GEMINI_API_BASE}/${CONFIG.GEMMA_MODEL}:generateContent?key=${apiKey}`;
+
+      const payload = {
+        systemInstruction: {
+          parts: [{
+            text: "You are CHUSys AI, a clinical forecasting assistant. You must output ONLY valid JSON. Do not include markdown formatting, backticks, or any explanation outside the JSON object. The JSON must have exactly two keys: 'forecast' (an array of exactly 7 numbers representing daily patient admissions) and 'rationale' (a concise string explaining the projection)."
+          }]
+        },
+        contents: [{
+          parts: [{
+            text: `Department: ${dept}. Past 14 days of patient admission history: ${JSON.stringify(histArray)}. Please provide the 7-day forecast.`
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.2
+        }
+      };
+
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errBody = await response.text();
+          throw new Error(`HTTP ${response.status}: ${errBody}`);
+        }
+
+        const data = await response.json();
+        const rawText = data.candidates[0].content.parts[0].text;
+        
+        // Clean potential markdown wrappers
+        let cleanText = rawText.trim();
+        if (cleanText.startsWith('```json')) cleanText = cleanText.replace(/```json/g, '');
+        if (cleanText.startsWith('```')) cleanText = cleanText.replace(/```/g, '');
+        cleanText = cleanText.trim();
+
+        const content = JSON.parse(cleanText);
+        
+        logTerminal(`✅ Gemma 4 Response Received! Forecast Array: ${JSON.stringify(content.forecast)}`);
+        return {
+          forecast: content.forecast,
+          rationale: content.rationale || "Gemma 4 open-weight inference completed via Gemini API.",
+          source: "Gemma 4 (Gemini API)"
+        };
+      } catch (err) {
+        logTerminal(`⚠️ Gemma API Error (${err.message}). Falling back to local MA7 model.`);
         return executeLocalFallbackPrediction(histArray, dept);
       }
     }
@@ -1149,7 +1256,13 @@
 
     async function runSurgePrediction() {
       const histValues = historicalData.map(d => d.value);
-      const res = await fetchDeepSeekSurgePrediction(histValues, currentDept);
+      let res;
+
+      if (activeAiProvider === 'gemma') {
+        res = await fetchGemmaSurgePrediction(histValues, currentDept);
+      } else {
+        res = await fetchDeepSeekSurgePrediction(histValues, currentDept);
+      }
 
       const now = new Date();
       forecastData = res.forecast.map((val, idx) => {
@@ -1169,19 +1282,27 @@
       showToast("Forecast Refreshed", `Calculated 7-day influx via ${res.source}.`, "success");
     }
 
-    // Modal API Config
+    // API Key Modal Logic
     function openApiKeyModal() {
-      const k = localStorage.getItem("CHUSYS_DEEPSEEK_KEY") || "";
-      document.getElementById("deepseekApiKeyInput").value = k;
+      const dKey = localStorage.getItem("CHUSYS_DEEPSEEK_KEY") || "";
+      const gKey = localStorage.getItem("CHUSYS_GEMINI_KEY") || "";
+      document.getElementById("deepseekApiKeyInput").value = dKey;
+      document.getElementById("geminiApiKeyInput").value = gKey;
       openModal("apiKeyModal");
     }
     function closeApiKeyModal() { closeModal("apiKeyModal"); }
-    function saveApiKey() {
-      const k = document.getElementById("deepseekApiKeyInput").value.trim();
-      if (k) localStorage.setItem("CHUSYS_DEEPSEEK_KEY", k);
+    function saveApiKeys() {
+      const dKey = document.getElementById("deepseekApiKeyInput").value.trim();
+      const gKey = document.getElementById("geminiApiKeyInput").value.trim();
+      
+      if (dKey) localStorage.setItem("CHUSYS_DEEPSEEK_KEY", dKey);
       else localStorage.removeItem("CHUSYS_DEEPSEEK_KEY");
+      
+      if (gKey) localStorage.setItem("CHUSYS_GEMINI_KEY", gKey);
+      else localStorage.removeItem("CHUSYS_GEMINI_KEY");
+      
       closeApiKeyModal();
-      showToast("Key Saved", k ? "DeepSeek API key stored locally." : "API Key cleared.", "success");
+      showToast("API Keys Saved", "Configuration updated for both providers.", "success");
     }
 
     // Seed Data
@@ -1296,6 +1417,7 @@
 
     function generateSyntheticData() {
       historicalData = []; forecastData = [];
+      setDataSourceBadge('simulated');
       const p = deptPresets[currentDept] || deptPresets['ER'];
       const now = new Date();
       for (let i = 14; i >= 1; i--) {
@@ -1325,8 +1447,8 @@
             {
               label: 'Historical Actuals',
               data: historicalData.map(d => d.value),
-              borderColor: '#14b8a6',
-              backgroundColor: 'rgba(20, 184, 166, 0.08)',
+              borderColor: '#06b6d4',
+              backgroundColor: 'rgba(6, 182, 212, 0.08)',
               fill: true,
               tension: 0.3,
               pointRadius: 4,
@@ -1335,8 +1457,8 @@
             {
               label: 'AI Predictive Forecast',
               data: new Array(historicalData.length - 1).fill(null).concat([historicalData[historicalData.length - 1].value], forecastData.map(d => d.value)),
-              borderColor: '#38bdf8',
-              backgroundColor: 'rgba(56, 189, 248, 0.08)',
+              borderColor: '#3b82f6',
+              backgroundColor: 'rgba(59, 130, 246, 0.08)',
               borderDash: [6, 6],
               fill: true,
               tension: 0.3,
@@ -1355,7 +1477,7 @@
               borderColor: '#334155',
               borderWidth: 1,
               titleColor: '#f8fafc',
-              bodyColor: '#2dd4bf',
+              bodyColor: '#22d3ee',
               padding: 10,
               displayColors: false,
               callbacks: {
@@ -1443,8 +1565,8 @@
         return `
           <tr class="hover:bg-slate-800/40 transition">
             <td class="py-3 px-3"><span class="font-bold text-white">${escapeHtml(d.date)}</span> <span class="text-slate-500 font-mono text-[10px]">(${escapeHtml(d.dayName)})</span></td>
-            <td class="py-3 px-3 text-sky-400 font-bold">${d.value} Patients</td>
-            <td class="py-3 px-3"><span class="bg-sky-500/10 text-sky-300 px-2 py-0.5 rounded border border-sky-500/20 font-bold">${reqN} RNs</span></td>
+            <td class="py-3 px-3 text-blue-400 font-bold">${d.value} Patients</td>
+            <td class="py-3 px-3"><span class="bg-blue-500/10 text-blue-300 px-2 py-0.5 rounded border border-blue-500/20 font-bold">${reqN} RNs</span></td>
             <td class="py-3 px-3"><span class="bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/20 font-bold">${reqD} MDs</span></td>
             <td class="py-3 px-3 text-slate-300 font-mono">${curN} RNs / ${curD} MDs</td>
             <td class="py-3 px-3 text-right">
@@ -1498,6 +1620,7 @@
             const data = JSON.parse(e.target.result);
             if (Array.isArray(data) && data.length) {
               historicalData = data.slice(0, 14).map((val, idx) => ({ date: `Day -${14 - idx}`, value: Number(val) || 30 }));
+              setDataSourceBadge('imported', file.name);
               updateChart();
               runSurgePrediction();
               showToast("Import Success", "Loaded time-series JSON database.", "success");
@@ -1510,6 +1633,7 @@
             const nums = json.flat().map(Number).filter(n => !isNaN(n) && n > 0);
             if (nums.length >= 7) {
               historicalData = nums.slice(-14).map((val, idx) => ({ date: `Day -${nums.slice(-14).length - idx}`, value: val }));
+              setDataSourceBadge('imported', file.name);
               updateChart();
               runSurgePrediction();
               showToast("Import Success", "Parsed XLSX database time-series.", "success");
@@ -1550,13 +1674,13 @@
         const fin = calcPatientFinancials(p);
         const acuityColor = p.acuity === 'Critical' ? 'bg-rose-500/20 text-rose-300 border-rose-500/30' :
                              p.acuity === 'High' ? 'bg-amber-500/20 text-amber-300 border-amber-500/30' :
-                             'bg-teal-500/20 text-teal-300 border-teal-500/30';
+                             'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
 
         return `
-          <div class="glass-panel rounded-2xl p-5 border border-slate-800 space-y-4 hover:border-teal-500/40 transition">
+          <div class="glass-panel rounded-2xl p-5 border border-slate-800 space-y-4 hover:border-cyan-500/40 transition">
             <div class="flex items-start justify-between">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 border border-teal-500/20 flex items-center justify-center font-bold text-xs shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center font-bold text-xs shrink-0">
                   ${p.isNewborn ? `<i class="fa-solid fa-baby text-purple-400 text-lg"></i>` : escapeHtml(p.code.replace('Patient #', '#'))}
                 </div>
                 <div>
@@ -1572,13 +1696,13 @@
 
             <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-1.5 text-xs">
               <div class="flex justify-between"><span class="text-slate-400">Diagnosis:</span><span class="font-medium text-slate-200 truncate max-w-[180px]">${escapeHtml(p.diagnosis)}</span></div>
-              <div class="flex justify-between"><span class="text-slate-400">Physician:</span><span class="text-teal-400 font-medium">${escapeHtml(p.doctor)}</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Physician:</span><span class="text-cyan-400 font-medium">${escapeHtml(p.doctor)}</span></div>
               <div class="flex justify-between"><span class="text-slate-400">Gross Bill:</span><span class="text-white font-bold">${formatMAD(fin.gross)}</span></div>
             </div>
 
             <div class="flex items-center justify-between pt-1">
               <span class="text-[11px] text-slate-400 font-mono">${escapeHtml(p.insurance.provider.split('/')[0])}</span>
-              <button type="button" onclick="openPatientModal('${p.id}')" class="text-xs bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 border border-teal-500/30 px-3 py-1.5 rounded-lg font-semibold transition flex items-center space-x-1">
+              <button type="button" onclick="openPatientModal('${p.id}')" class="text-xs bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 border border-cyan-500/30 px-3 py-1.5 rounded-lg font-semibold transition flex items-center space-x-1">
                 <i class="fa-solid fa-file-medical"></i><span>Clinical Record</span>
               </button>
             </div>
@@ -1592,11 +1716,11 @@
     function filterPatientDept(dept, evt) {
       selectedPatientDeptFilter = dept;
       document.querySelectorAll('.patient-dept-btn').forEach(b => {
-        b.classList.remove('active', 'bg-teal-500/20', 'text-teal-300', 'border-teal-500/30');
+        b.classList.remove('active', 'bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
         b.classList.add('bg-slate-800', 'text-slate-400');
       });
       if (evt && evt.currentTarget) {
-        evt.currentTarget.classList.add('active', 'bg-teal-500/20', 'text-teal-300', 'border-teal-500/30');
+        evt.currentTarget.classList.add('active', 'bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
         evt.currentTarget.classList.remove('bg-slate-800', 'text-slate-400');
       }
       renderPatients();
@@ -1635,7 +1759,7 @@
       if (linkedEq.length) {
         eqBox.innerHTML = linkedEq.map(e => `
           <div class="flex justify-between items-center text-xs p-2 bg-slate-900 rounded-lg border border-slate-800">
-            <span class="font-bold text-white"><i class="fa-solid fa-laptop-medical text-amber-400 mr-2"></i>${escapeHtml(e.name)}</span>
+            <span class="font-bold text-white"><i class="fa-solid fa-laptop-medical text-cyan-400 mr-2"></i>${escapeHtml(e.name)}</span>
             <span class="font-bold text-[10px] px-2 py-0.5 rounded ${e.status==='Operational'?'bg-emerald-500/20 text-emerald-300':'bg-rose-500/20 text-rose-300'}">${escapeHtml(e.status)}</span>
           </div>
         `).join('');
@@ -1661,7 +1785,7 @@
           <td class="py-2.5 px-3 font-semibold text-white">${escapeHtml(m.name)}</td>
           <td class="py-2.5 px-3 font-mono">${escapeHtml(m.dosage)}</td>
           <td class="py-2.5 px-3 text-slate-400">${escapeHtml(m.schedule)}</td>
-          <td class="py-2.5 px-3 text-right font-bold text-teal-400">${formatMAD(m.cost)}</td>
+          <td class="py-2.5 px-3 text-right font-bold text-cyan-400">${formatMAD(m.cost)}</td>
         </tr>
       `).join('');
 
@@ -1684,13 +1808,11 @@
 
     // Patient Registration Logic
     function openRegistrationModal() {
-      // Populate doctors select
       const docSel = document.getElementById('regDoctor');
       const nurseSel = document.getElementById('regNurse');
       docSel.innerHTML = staffList.filter(s => s.role === 'Doctor').map(d => `<option value="${escapeHtml(d.name)}">${escapeHtml(d.name)} (${escapeHtml(d.dept)})</option>`).join('');
       nurseSel.innerHTML = staffList.filter(s => s.role === 'Nurse').map(n => `<option value="${escapeHtml(n.name)}">${escapeHtml(n.name)} (${escapeHtml(n.dept)})</option>`).join('');
 
-      // Populate Mother select
       const motherSel = document.getElementById('regMotherId');
       motherSel.innerHTML = `<option value="">-- Select Admitted Mother --</option>` +
         patientsList.filter(p => p.gender === 'Female' && !p.isNewborn).map(m => `<option value="${m.id}">${escapeHtml(m.name)} (${m.code})</option>`).join('');
@@ -1715,7 +1837,7 @@
         document.getElementById('regAge').value = 0;
         document.getElementById('regDept').value = "Pediatrics";
       } else {
-        pBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-teal-500/20 text-teal-300 border border-teal-500/30 flex items-center justify-center space-x-2";
+        pBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-center space-x-2";
         nBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center space-x-2";
         nbContainer.classList.add('hidden');
         genNameField.classList.remove('hidden');
@@ -1801,7 +1923,6 @@
         return matchCat && matchStat && matchSearch;
       });
 
-      // Update KPI Badges
       const opCount = equipmentList.filter(e => e.status === 'Operational').length;
       const repCount = equipmentList.filter(e => e.status === 'Needs Repair').length;
       const maintCount = equipmentList.filter(e => e.status === 'Under Maintenance').length;
@@ -1810,7 +1931,7 @@
       document.getElementById('statOperationalEquipment').innerText = opCount;
       document.getElementById('statRepairEquipment').innerText = repCount;
       document.getElementById('statMaintenanceEquipment').innerText = maintCount;
-      document.getElementById('equipmentRepairBadge').innerText = `${repCount} Repairs`;
+      document.getElementById('equipmentRepairBadge').innerText = `${repCount}`;
 
       const alertBanner = document.getElementById('equipmentAlertBanner');
       if (repCount > 0) {
@@ -1831,10 +1952,10 @@
                            'bg-amber-500/20 text-amber-300 border-amber-500/30';
 
         return `
-          <div class="glass-panel rounded-2xl p-5 border border-slate-800 space-y-4 hover:border-amber-500/40 transition">
+          <div class="glass-panel rounded-2xl p-5 border border-slate-800 space-y-4 hover:border-cyan-500/40 transition">
             <div class="flex items-start justify-between">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center font-bold text-xs shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center font-bold text-xs shrink-0">
                   <i class="fa-solid fa-laptop-medical text-lg"></i>
                 </div>
                 <div>
@@ -1847,13 +1968,13 @@
 
             <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-1.5 text-xs">
               <div class="flex justify-between"><span class="text-slate-400">Location:</span><span class="font-medium text-slate-200">${escapeHtml(e.location)}</span></div>
-              <div class="flex justify-between"><span class="text-slate-400">Department:</span><span class="text-amber-400 font-medium">${escapeHtml(e.assignedDept)}</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Department:</span><span class="text-cyan-400 font-medium">${escapeHtml(e.assignedDept)}</span></div>
               <div class="flex justify-between"><span class="text-slate-400">Error State:</span><span class="${e.errorCode.includes('Error')?'text-rose-400 font-bold':'text-slate-300'}">${escapeHtml(e.errorCode)}</span></div>
             </div>
 
             <div class="text-[11px] text-slate-400 border-t border-slate-800/80 pt-2 flex justify-between items-center">
               <span>Bio-Eng: <strong class="text-slate-300">${escapeHtml(e.engineer.split(' ')[1] || e.engineer)}</strong></span>
-              <button type="button" onclick="toggleEquipmentStatus('${e.id}')" class="text-[11px] text-amber-400 hover:text-amber-300 underline font-medium">Toggle Status</button>
+              <button type="button" onclick="toggleEquipmentStatus('${e.id}')" class="text-[11px] text-cyan-400 hover:text-cyan-300 underline font-medium">Toggle Status</button>
             </div>
           </div>
         `;
@@ -1865,11 +1986,11 @@
     function filterEquipmentCategory(cat, evt) {
       selectedEquipmentCategoryFilter = cat;
       document.querySelectorAll('.eq-cat-btn').forEach(b => {
-        b.classList.remove('active', 'bg-amber-500/20', 'text-amber-300', 'border-amber-500/30');
+        b.classList.remove('active', 'bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
         b.classList.add('bg-slate-800', 'text-slate-400');
       });
       if (evt && evt.currentTarget) {
-        evt.currentTarget.classList.add('active', 'bg-amber-500/20', 'text-amber-300', 'border-amber-500/30');
+        evt.currentTarget.classList.add('active', 'bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
         evt.currentTarget.classList.remove('bg-slate-800', 'text-slate-400');
       }
       renderEquipment();
@@ -1932,7 +2053,6 @@
         return matchRole && matchStat && matchSearch;
       });
 
-      // Update KPI counters
       const activeCount = staffList.filter(s => s.status === 'Checked In').length;
       const missingCount = staffList.filter(s => s.status === 'Shift Not Checked-In').length;
       const breakCount = staffList.filter(s => s.status === 'On Break').length;
@@ -1953,13 +2073,13 @@
                             s.status === 'On Break' ? 'bg-amber-500/20 text-amber-300 border-amber-500/30' :
                             'bg-rose-500/20 text-rose-300 border-rose-500/30';
 
-        const roleIcon = s.role === 'Doctor' ? 'fa-user-doctor text-indigo-400' : 'fa-user-nurse text-sky-400';
+        const roleIcon = s.role === 'Doctor' ? 'fa-user-doctor text-blue-400' : 'fa-user-nurse text-cyan-400';
 
         return `
-          <div class="glass-panel rounded-2xl p-5 border border-slate-800 space-y-4 hover:border-indigo-500/40 transition">
+          <div class="glass-panel rounded-2xl p-5 border border-slate-800 space-y-4 hover:border-cyan-500/40 transition">
             <div class="flex items-start justify-between">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center font-bold text-xs shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center font-bold text-xs shrink-0">
                   <i class="fa-solid ${roleIcon} text-lg"></i>
                 </div>
                 <div>
@@ -1971,14 +2091,14 @@
             </div>
 
             <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-1.5 text-xs">
-              <div class="flex justify-between"><span class="text-slate-400">Department:</span><span class="font-bold text-teal-400">${escapeHtml(s.dept)}</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Department:</span><span class="font-bold text-cyan-400">${escapeHtml(s.dept)}</span></div>
               <div class="flex justify-between"><span class="text-slate-400">Shift Window:</span><span class="font-mono text-slate-200">${escapeHtml(s.shiftStart)} - ${escapeHtml(s.shiftEnd)}</span></div>
               <div class="flex justify-between"><span class="text-slate-400">Checked-In At:</span><span class="font-mono text-emerald-400">${escapeHtml(s.checkInTime)}</span></div>
             </div>
 
             <div class="flex items-center justify-between border-t border-slate-800/80 pt-2 text-[11px]">
-              <a href="tel:${escapeHtml(s.phone)}" class="text-sky-400 font-mono hover:underline"><i class="fa-solid fa-phone mr-1"></i>${escapeHtml(s.phone)}</a>
-              <button type="button" onclick="toggleStaffStatus('${s.id}')" class="text-indigo-400 hover:text-indigo-300 font-semibold underline">Shift Status</button>
+              <a href="tel:${escapeHtml(s.phone)}" class="text-blue-400 font-mono hover:underline"><i class="fa-solid fa-phone mr-1"></i>${escapeHtml(s.phone)}</a>
+              <button type="button" onclick="toggleStaffStatus('${s.id}')" class="text-cyan-400 hover:text-cyan-300 font-semibold underline">Shift Status</button>
             </div>
           </div>
         `;
@@ -2011,10 +2131,10 @@
       const docLabel = document.getElementById('labelRoleDoctor');
       const nurseLabel = document.getElementById('labelRoleNurse');
       if (role === 'Doctor') {
-        docLabel.className = "flex items-center justify-center space-x-2 p-2 rounded-lg cursor-pointer transition bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 font-bold";
+        docLabel.className = "flex items-center justify-center space-x-2 p-2 rounded-lg cursor-pointer transition bg-cyan-600/20 text-cyan-300 border border-cyan-500/30 font-bold";
         nurseLabel.className = "flex items-center justify-center space-x-2 p-2 rounded-lg cursor-pointer transition text-slate-400 hover:text-slate-200";
       } else {
-        nurseLabel.className = "flex items-center justify-center space-x-2 p-2 rounded-lg cursor-pointer transition bg-sky-600/20 text-sky-300 border border-sky-500/30 font-bold";
+        nurseLabel.className = "flex items-center justify-center space-x-2 p-2 rounded-lg cursor-pointer transition bg-blue-600/20 text-blue-300 border border-blue-500/30 font-bold";
         docLabel.className = "flex items-center justify-center space-x-2 p-2 rounded-lg cursor-pointer transition text-slate-400 hover:text-slate-200";
       }
     }
@@ -2063,7 +2183,7 @@
             </div>
             <div>
               <h4 class="font-bold text-white text-xs">${escapeHtml(s.name)}</h4>
-              <p class="text-[10px] text-teal-400 font-semibold">${escapeHtml(s.role)} • ${escapeHtml(s.dept)}</p>
+              <p class="text-[10px] text-cyan-400 font-semibold">${escapeHtml(s.role)} • ${escapeHtml(s.dept)}</p>
               <p class="text-[10px] font-mono text-slate-400 mt-0.5">${escapeHtml(s.phone)}</p>
             </div>
           </div>
@@ -2102,7 +2222,7 @@
         closeModal('adminPinModal');
         document.getElementById('adminModeBanner').classList.remove('hidden');
         document.getElementById('adminLockIcon').className = "fa-solid fa-lock-open text-emerald-400";
-        document.getElementById('adminBtnLabel').innerText = "Admin Portal Active";
+        document.getElementById('adminBtnLabel').innerText = "Admin Active";
         showToast("Admin Mode Active", "Unlocked registration modals and database management.", "success");
         logTerminal("Admin portal unlocked successfully.");
       } else {
@@ -2116,7 +2236,7 @@
       isAdmin = false;
       document.getElementById('adminModeBanner').classList.add('hidden');
       document.getElementById('adminLockIcon').className = "fa-solid fa-lock text-amber-400";
-      document.getElementById('adminBtnLabel').innerText = "Admin Portal (PIN: 1234)";
+      document.getElementById('adminBtnLabel').innerText = "Admin Portal";
       showToast("Admin Locked", "Returned to read-only staff perspective.", "amber");
       logTerminal("Admin mode locked.");
     }
@@ -2146,13 +2266,14 @@
       renderStaff();
       renderEmergencyDispatch();
       logTerminal("🏥 CHUSys Command Platform Initialized & Active.");
+      logTerminal("🔗 Dual AI Provider ready: DeepSeek API & Google Gemma 4 via Gemini API.");
     });
 
     // Expose Functions Globally
     Object.assign(window, {
-      fetchDeepSeekSurgePrediction, executeLocalFallbackPrediction, runSurgePrediction,
-      switchTab, switchDepartment, resetSlidersToDefaults, updateCalculations,
-      openApiKeyModal, closeApiKeyModal, saveApiKey, toggleAdminModeBtn, verifyAdminPin,
+      fetchDeepSeekSurgePrediction, fetchGemmaSurgePrediction, executeLocalFallbackPrediction, runSurgePrediction,
+      switchTab, switchDepartment, resetSlidersToDefaults, updateCalculations, setAiProvider,
+      openApiKeyModal, closeApiKeyModal, saveApiKeys, toggleAdminModeBtn, verifyAdminPin,
       closeAdminPinModal, lockAdminMode, testApiDirectly, testFallbackDirectly, clearConsoleLog,
       filterPatients, filterPatientDept, openPatientModal, closePatientModal,
       openRegistrationModal, closeRegistrationModal, setRegType, autoFillMotherDetails, handleRegistrationSubmit,
