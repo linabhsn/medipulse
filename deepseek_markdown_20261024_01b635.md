@@ -69,7 +69,6 @@ To ensure the platform never fails during a demo or offline scenario, we built a
 ## 👥 Authors
 
 - Lina Bouhsissin
-- Hamza Boumarg
 - Malak Jaouane
 
 ## 📄 License
