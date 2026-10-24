@@ -242,6 +242,7 @@
                 <div class="flex items-center space-x-2">
                   <h3 class="font-bold text-base text-white">DeepSeek AI Time-Series Influx Pipeline</h3>
                   <span id="badgeModelSource" class="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[11px] px-2 py-0.5 rounded font-mono">Model: DeepSeek AI</span>
+                  <span id="badgeDataSource" title="Simulated baseline — import your own CSV/XLSX/JSON to replace" class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] px-2 py-0.5 rounded font-mono">Data: Simulated</span>
                 </div>
                 <p class="text-xs text-slate-400 mt-0.5">Historical patient actuals vs predictive open-weight AI forecast</p>
               </div>
@@ -1008,6 +1009,7 @@
     let selectedPatientDeptFilter = 'ALL';
     let selectedEquipmentCategoryFilter = 'ALL';
     let registrationType = 'patient';
+    let dataSource = 'simulated';
 
     // Utilities
     const escapeHtml = (v) => v == null ? '' : String(v)
@@ -1016,6 +1018,21 @@
 
     const formatMAD = (n) => `${Math.round(Number(n) || 0).toLocaleString('en-US')} MAD`;
     const formatMAD2 = (n) => `${(Number(n) || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MAD`;
+
+    function setDataSourceBadge(type, fileName) {
+      dataSource = type;
+      const badge = document.getElementById('badgeDataSource');
+      if (!badge) return;
+      if (type === 'imported') {
+        badge.innerText = `Data: Imported (${fileName || 'file'})`;
+        badge.className = 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] px-2 py-0.5 rounded font-mono';
+        badge.title = `Imported from ${fileName || 'uploaded file'}`;
+      } else {
+        badge.innerText = 'Data: Simulated';
+        badge.className = 'bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] px-2 py-0.5 rounded font-mono';
+        badge.title = 'Simulated baseline — import your own CSV/XLSX/JSON to replace';
+      }
+    }
 
     function logTerminal(msg) {
       const term = document.getElementById("console-terminal");
@@ -1296,6 +1313,7 @@
 
     function generateSyntheticData() {
       historicalData = []; forecastData = [];
+      setDataSourceBadge('simulated');
       const p = deptPresets[currentDept] || deptPresets['ER'];
       const now = new Date();
       for (let i = 14; i >= 1; i--) {
@@ -1498,6 +1516,7 @@
             const data = JSON.parse(e.target.result);
             if (Array.isArray(data) && data.length) {
               historicalData = data.slice(0, 14).map((val, idx) => ({ date: `Day -${14 - idx}`, value: Number(val) || 30 }));
+              setDataSourceBadge('imported', file.name);
               updateChart();
               runSurgePrediction();
               showToast("Import Success", "Loaded time-series JSON database.", "success");
@@ -1510,6 +1529,7 @@
             const nums = json.flat().map(Number).filter(n => !isNaN(n) && n > 0);
             if (nums.length >= 7) {
               historicalData = nums.slice(-14).map((val, idx) => ({ date: `Day -${nums.slice(-14).length - idx}`, value: val }));
+              setDataSourceBadge('imported', file.name);
               updateChart();
               runSurgePrediction();
               showToast("Import Success", "Parsed XLSX database time-series.", "success");
