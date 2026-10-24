@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CHUSys Command — Moroccan hospital clinical, predictive staffing, biomedical equipment and financial management platform powered by DeepSeek AI.">
+  <meta name="description" content="CHUSys Command — Moroccan hospital clinical, predictive staffing, biomedical equipment and financial management platform powered by DeepSeek AI & Google Gemma 4.">
   <meta name="theme-color" content="#0891b2">
   <title>MediPulse CHUSys Command — Intelligent Hospital Management & AI Predictive Operations</title>
 
@@ -52,12 +52,11 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
 
   <!-- ============================================================ -->
-  <!-- CLEANED HEADER                                               -->
+  <!-- HEADER                                                       -->
   <!-- ============================================================ -->
   <header class="border-b border-slate-800 bg-slate-900/95 sticky top-0 z-40 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <!-- Brand -->
         <div class="flex items-center space-x-3">
           <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 shrink-0">
             <i class="fa-solid fa-hospital text-white text-lg"></i>
@@ -69,15 +68,22 @@
           </div>
         </div>
         
-        <!-- Right Actions (Simplified) -->
         <div class="flex items-center space-x-3 shrink-0">
-          <!-- DeepSeek API Config -->
-          <button type="button" onclick="openApiKeyModal()" title="Configure DeepSeek API" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs px-3 py-2 rounded-lg font-semibold transition flex items-center space-x-2">
+          <!-- AI Provider Switcher -->
+          <div class="flex items-center bg-slate-800 rounded-lg border border-slate-700 p-0.5">
+            <button type="button" onclick="setAiProvider('deepseek')" id="btnProviderDeepSeek" class="text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition bg-cyan-600 text-white shadow-sm">
+              DeepSeek
+            </button>
+            <button type="button" onclick="setAiProvider('gemma')" id="btnProviderGemma" class="text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition text-slate-400 hover:text-white">
+              Gemma 4
+            </button>
+          </div>
+
+          <button type="button" onclick="openApiKeyModal()" title="Configure API Keys" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs px-3 py-2 rounded-lg font-semibold transition flex items-center space-x-2">
             <i class="fa-solid fa-key text-amber-400"></i>
-            <span class="hidden sm:inline">API Key</span>
+            <span class="hidden sm:inline">API Keys</span>
           </button>
           
-          <!-- Admin Portal -->
           <button type="button" onclick="toggleAdminModeBtn()" id="adminToggleBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs px-3 py-2 rounded-lg font-semibold transition flex items-center space-x-2">
             <i id="adminLockIcon" class="fa-solid fa-lock text-amber-400"></i>
             <span id="adminBtnLabel" class="hidden md:inline">Admin Portal</span>
@@ -85,10 +91,9 @@
         </div>
       </div>
       
-      <!-- Navigation Tabs -->
       <nav class="flex space-x-1 sm:space-x-2 border-t border-slate-800/60 pt-1 overflow-x-auto no-scrollbar">
         <button type="button" onclick="switchTab('forecastTab')" id="btn-forecastTab" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
-          <i class="fa-solid fa-brain text-cyan-400"></i><span>DeepSeek AI Forecast</span>
+          <i class="fa-solid fa-brain text-cyan-400"></i><span>AI Forecast</span>
         </button>
         <button type="button" onclick="switchTab('patientsTab')" id="btn-patientsTab" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition rounded-t-lg flex items-center space-x-2 whitespace-nowrap">
           <i class="fa-solid fa-hospital-patient text-cyan-400"></i><span>Patients</span>
@@ -116,7 +121,6 @@
   <!-- ============================================================ -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-    <!-- Admin Banner (Only shows when unlocked) -->
     <div id="adminModeBanner" class="hidden bg-cyan-900/20 border border-cyan-500/30 p-3 rounded-xl flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <span class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs shrink-0">
@@ -137,7 +141,6 @@
     <!-- ==================== TAB 1: FORECAST ==================== -->
     <section id="forecastTab" class="tab-content space-y-6">
       
-      <!-- Top Surge Banner -->
       <div id="statusAlertBanner" class="p-4 rounded-xl glass-panel border-l-4 border-amber-500 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all duration-300">
         <div class="flex items-start sm:items-center space-x-3">
           <div id="statusAlertIcon" class="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
@@ -153,7 +156,6 @@
         </div>
       </div>
 
-      <!-- Department Selector & DeepSeek AI Control Strip -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
         <div class="flex items-center space-x-3 w-full sm:w-auto">
           <label for="departmentSelect" class="text-xs font-semibold text-slate-400 uppercase tracking-wider shrink-0">Target Ward:</label>
@@ -176,7 +178,6 @@
         </div>
       </div>
 
-      <!-- KPI Metrics Strip -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="glass-panel rounded-xl p-4 relative overflow-hidden">
           <div class="flex items-center justify-between">
@@ -228,7 +229,6 @@
         </div>
       </div>
 
-      <!-- Main Forecast Chart & Rationale Panel -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 space-y-6 min-w-0">
           
@@ -236,7 +236,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800 gap-2">
               <div>
                 <div class="flex items-center space-x-2">
-                  <h3 class="font-bold text-base text-white">DeepSeek AI Influx Pipeline</h3>
+                  <h3 class="font-bold text-base text-white">AI Influx Pipeline</h3>
                   <span id="badgeModelSource" class="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[11px] px-2 py-0.5 rounded font-mono">Model: DeepSeek AI</span>
                   <span id="badgeDataSource" title="Simulated baseline — import your own CSV/XLSX/JSON to replace" class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] px-2 py-0.5 rounded font-mono">Data: Simulated</span>
                 </div>
@@ -248,9 +248,8 @@
               </div>
             </div>
 
-            <!-- DeepSeek Reasoning Banner -->
             <div id="deepseekRationaleBox" class="mt-3 p-3 bg-cyan-950/30 rounded-xl border border-cyan-500/30 text-xs space-y-1">
-              <span class="font-bold text-cyan-300 flex items-center"><i class="fa-solid fa-comment-medical mr-1.5"></i> DeepSeek Clinical Rationale:</span>
+              <span class="font-bold text-cyan-300 flex items-center"><i class="fa-solid fa-comment-medical mr-1.5"></i> AI Clinical Rationale:</span>
               <p id="deepseekRationaleText" class="text-slate-300 leading-relaxed">Initialized. Executing 7-day velocity weighting and anomaly adjustments...</p>
             </div>
 
@@ -616,24 +615,23 @@
           <div>
             <h3 class="font-bold text-cyan-400 text-lg flex items-center gap-2">
               <i class="fa-solid fa-terminal"></i>
-              <span>Judge Verification & DeepSeek Live Console</span>
+              <span>Judge Verification & AI Live Console</span>
             </h3>
-            <p class="text-xs text-slate-400">Verify code execution, open-weight DeepSeek API endpoints, and mathematical fallback logic.</p>
+            <p class="text-xs text-slate-400">Verify code execution, open-weight API endpoints, and mathematical fallback logic.</p>
           </div>
           <button type="button" onclick="clearConsoleLog()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg border border-slate-700">
             Clear Terminal
           </button>
         </div>
 
-        <!-- Terminal Log Area -->
         <div id="console-terminal" class="bg-black/90 p-4 rounded-xl border border-slate-800 font-mono text-xs text-emerald-400 h-64 overflow-y-auto space-y-1">
           <p class="text-slate-500">[System Ready] CHUSys Terminal Initialized...</p>
-          <p class="text-cyan-400">&gt; Exposed global functions: window.fetchDeepSeekSurgePrediction(), window.executeLocalFallbackPrediction(), window.runSurgePrediction()</p>
+          <p class="text-cyan-400">&gt; Exposed global functions: window.fetchDeepSeekSurgePrediction(), window.fetchGemmaSurgePrediction(), window.executeLocalFallbackPrediction(), window.runSurgePrediction()</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
           <button type="button" onclick="testApiDirectly()" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 text-xs font-semibold text-cyan-300 text-left">
-            ⚡ Test DeepSeek API Direct Call
+            ⚡ Test Active AI Direct Call
           </button>
           <button type="button" onclick="testFallbackDirectly()" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 text-xs font-semibold text-emerald-300 text-left">
             📐 Test Fallback MA7 Formula
@@ -653,28 +651,36 @@
   <!-- ============================================================ -->
   <div id="toastContainer" aria-live="polite" class="fixed bottom-5 right-5 z-50 space-y-3 max-w-sm"></div>
 
-  <!-- DeepSeek API Key Modal -->
+  <!-- API Key Modal -->
   <div id="apiKeyModal" role="dialog" aria-modal="true" aria-hidden="true" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="glass-panel bg-slate-900 border border-cyan-500/40 w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-3">
         <h3 class="font-bold text-white flex items-center gap-2">
           <i class="fa-solid fa-key text-amber-400"></i>
-          <span>DeepSeek API Configuration</span>
+          <span>AI API Configuration</span>
         </h3>
         <button type="button" onclick="closeApiKeyModal()" class="text-slate-400 hover:text-slate-200">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <p class="text-xs text-slate-300 leading-relaxed">
-        Input your DeepSeek API key to target <code class="text-cyan-300">https://api.deepseek.com/v1/chat/completions</code>. If omitted, CHUSys automatically executes the local mathematical MA7 fallback engine.
-      </p>
-      <div>
-        <label for="deepseekApiKeyInput" class="block text-xs font-semibold text-slate-300 mb-1">API Key</label>
-        <input type="password" id="deepseekApiKeyInput" placeholder="sk-..." class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono focus:ring-1 focus:ring-cyan-500">
+      
+      <div class="space-y-3">
+        <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-700">
+          <label for="deepseekApiKeyInput" class="block text-xs font-bold text-cyan-300 mb-1 flex items-center gap-2"><i class="fa-solid fa-brain"></i> DeepSeek API Key</label>
+          <input type="password" id="deepseekApiKeyInput" placeholder="sk-..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono focus:ring-1 focus:ring-cyan-500">
+          <p class="text-[10px] text-slate-400 mt-1">Targets api.deepseek.com</p>
+        </div>
+        
+        <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-700">
+          <label for="geminiApiKeyInput" class="block text-xs font-bold text-purple-300 mb-1 flex items-center gap-2"><i class="fa-solid fa-gem"></i> Google Gemini API Key (for Gemma)</label>
+          <input type="password" id="geminiApiKeyInput" placeholder="AIza..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono focus:ring-1 focus:ring-purple-500">
+          <p class="text-[10px] text-slate-400 mt-1">Get a free key at aistudio.google.com</p>
+        </div>
       </div>
+
       <div class="flex justify-end space-x-2 pt-2">
         <button type="button" onclick="closeApiKeyModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded-xl font-semibold transition">Cancel</button>
-        <button type="button" onclick="saveApiKey()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition">Save Key</button>
+        <button type="button" onclick="saveApiKeys()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-5 py-2 rounded-xl font-bold transition">Save Keys</button>
       </div>
     </div>
   </div>
@@ -982,7 +988,8 @@
   <!-- ============================================================ -->
   <script>
     /**
-     * MediPulse CHUSys Platform & DeepSeek AI Engine
+     * MediPulse CHUSys Platform
+     * DeepSeek AI & Google Gemma 4 via Gemini API
      * Repository: https://github.com/linabhsn/bionics-GRP
      * Authors: Lina Bouhsissin, Hamza Boumarg, Malak Jaouane
      */
@@ -993,7 +1000,9 @@
       COST_PER_SHIFT_MAD: 3800,
       DEFAULT_DEPT: "ER",
       DEEPSEEK_API_URL: "https://api.deepseek.com/v1/chat/completions",
-      DEEPSEEK_MODEL: "deepseek-chat"
+      DEEPSEEK_MODEL: "deepseek-chat",
+      GEMINI_API_BASE: "https://generativelanguage.googleapis.com/v1beta/models",
+      GEMMA_MODEL: "gemma-4-26b-a4b-it" // or "gemma-4-31b-it"
     };
 
     // State
@@ -1006,6 +1015,7 @@
     let selectedEquipmentCategoryFilter = 'ALL';
     let registrationType = 'patient';
     let dataSource = 'simulated';
+    let activeAiProvider = 'deepseek'; // 'deepseek' or 'gemma'
 
     // Utilities
     const escapeHtml = (v) => v == null ? '' : String(v)
@@ -1092,13 +1102,34 @@
       setTimeout(() => { t.classList.add('opacity-0', 'translate-y-2'); setTimeout(() => t.remove(), 300); }, 4000);
     }
 
-    // DeepSeek API & Predictive Logic
+    // AI Provider Switcher
+    function setAiProvider(provider) {
+      activeAiProvider = provider;
+      const btnDeepSeek = document.getElementById('btnProviderDeepSeek');
+      const btnGemma = document.getElementById('btnProviderGemma');
+      
+      if (provider === 'gemma') {
+        btnGemma.className = 'text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition bg-purple-600 text-white shadow-sm';
+        btnDeepSeek.className = 'text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition text-slate-400 hover:text-white';
+        document.getElementById('badgeModelSource').innerText = `Model: Gemma 4 (Gemini API)`;
+        document.getElementById('badgeModelSource').className = 'bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[11px] px-2 py-0.5 rounded font-mono';
+      } else {
+        btnDeepSeek.className = 'text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition bg-cyan-600 text-white shadow-sm';
+        btnGemma.className = 'text-[11px] font-semibold px-2.5 py-1.5 rounded-md transition text-slate-400 hover:text-white';
+        document.getElementById('badgeModelSource').innerText = `Model: DeepSeek AI`;
+        document.getElementById('badgeModelSource').className = 'bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[11px] px-2 py-0.5 rounded font-mono';
+      }
+      logTerminal(`Switched AI provider to ${provider === 'gemma' ? 'Google Gemma 4' : 'DeepSeek'}.`);
+      showToast('AI Provider Changed', `Active model: ${provider === 'gemma' ? 'Gemma 4 via Gemini API' : 'DeepSeek'}`, 'success');
+    }
+
+    // DeepSeek API Logic
     async function fetchDeepSeekSurgePrediction(histArray, dept) {
       logTerminal(`⚡ Requesting DeepSeek API... Target Dept: ${dept}`);
       const apiKey = localStorage.getItem("CHUSYS_DEEPSEEK_KEY");
 
       if (!apiKey) {
-        logTerminal("⚠️ No API Key found in LocalStorage. Routing request to Mathematical MA7 Fallback.");
+        logTerminal("⚠️ No DeepSeek API Key found. Routing to MA7 Fallback.");
         return executeLocalFallbackPrediction(histArray, dept);
       }
 
@@ -1136,7 +1167,70 @@
           source: "DeepSeek Open-Weight AI"
         };
       } catch (err) {
-        logTerminal(`⚠️ API Error (${err.message}). Falling back to local MA7 model.`);
+        logTerminal(`⚠️ DeepSeek API Error (${err.message}). Falling back to local MA7 model.`);
+        return executeLocalFallbackPrediction(histArray, dept);
+      }
+    }
+
+    // Gemma 4 via Gemini API Logic
+    async function fetchGemmaSurgePrediction(histArray, dept) {
+      logTerminal(`⚡ Requesting Gemma 4 via Gemini API... Target Dept: ${dept}`);
+      const apiKey = localStorage.getItem("CHUSYS_GEMINI_KEY");
+
+      if (!apiKey) {
+        logTerminal("⚠️ No Gemini API Key found. Routing to MA7 Fallback.");
+        return executeLocalFallbackPrediction(histArray, dept);
+      }
+
+      const url = `${CONFIG.GEMINI_API_BASE}/${CONFIG.GEMMA_MODEL}:generateContent?key=${apiKey}`;
+
+      const payload = {
+        systemInstruction: {
+          parts: [{
+            text: "You are CHUSys AI, a clinical forecasting assistant. You must output ONLY valid JSON. Do not include markdown formatting, backticks, or any explanation outside the JSON object. The JSON must have exactly two keys: 'forecast' (an array of exactly 7 numbers representing daily patient admissions) and 'rationale' (a concise string explaining the projection)."
+          }]
+        },
+        contents: [{
+          parts: [{
+            text: `Department: ${dept}. Past 14 days of patient admission history: ${JSON.stringify(histArray)}. Please provide the 7-day forecast.`
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.2
+        }
+      };
+
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errBody = await response.text();
+          throw new Error(`HTTP ${response.status}: ${errBody}`);
+        }
+
+        const data = await response.json();
+        const rawText = data.candidates[0].content.parts[0].text;
+        
+        // Clean potential markdown wrappers
+        let cleanText = rawText.trim();
+        if (cleanText.startsWith('```json')) cleanText = cleanText.replace(/```json/g, '');
+        if (cleanText.startsWith('```')) cleanText = cleanText.replace(/```/g, '');
+        cleanText = cleanText.trim();
+
+        const content = JSON.parse(cleanText);
+        
+        logTerminal(`✅ Gemma 4 Response Received! Forecast Array: ${JSON.stringify(content.forecast)}`);
+        return {
+          forecast: content.forecast,
+          rationale: content.rationale || "Gemma 4 open-weight inference completed via Gemini API.",
+          source: "Gemma 4 (Gemini API)"
+        };
+      } catch (err) {
+        logTerminal(`⚠️ Gemma API Error (${err.message}). Falling back to local MA7 model.`);
         return executeLocalFallbackPrediction(histArray, dept);
       }
     }
@@ -1162,7 +1256,13 @@
 
     async function runSurgePrediction() {
       const histValues = historicalData.map(d => d.value);
-      const res = await fetchDeepSeekSurgePrediction(histValues, currentDept);
+      let res;
+
+      if (activeAiProvider === 'gemma') {
+        res = await fetchGemmaSurgePrediction(histValues, currentDept);
+      } else {
+        res = await fetchDeepSeekSurgePrediction(histValues, currentDept);
+      }
 
       const now = new Date();
       forecastData = res.forecast.map((val, idx) => {
@@ -1182,19 +1282,27 @@
       showToast("Forecast Refreshed", `Calculated 7-day influx via ${res.source}.`, "success");
     }
 
-    // Modal API Config
+    // API Key Modal Logic
     function openApiKeyModal() {
-      const k = localStorage.getItem("CHUSYS_DEEPSEEK_KEY") || "";
-      document.getElementById("deepseekApiKeyInput").value = k;
+      const dKey = localStorage.getItem("CHUSYS_DEEPSEEK_KEY") || "";
+      const gKey = localStorage.getItem("CHUSYS_GEMINI_KEY") || "";
+      document.getElementById("deepseekApiKeyInput").value = dKey;
+      document.getElementById("geminiApiKeyInput").value = gKey;
       openModal("apiKeyModal");
     }
     function closeApiKeyModal() { closeModal("apiKeyModal"); }
-    function saveApiKey() {
-      const k = document.getElementById("deepseekApiKeyInput").value.trim();
-      if (k) localStorage.setItem("CHUSYS_DEEPSEEK_KEY", k);
+    function saveApiKeys() {
+      const dKey = document.getElementById("deepseekApiKeyInput").value.trim();
+      const gKey = document.getElementById("geminiApiKeyInput").value.trim();
+      
+      if (dKey) localStorage.setItem("CHUSYS_DEEPSEEK_KEY", dKey);
       else localStorage.removeItem("CHUSYS_DEEPSEEK_KEY");
+      
+      if (gKey) localStorage.setItem("CHUSYS_GEMINI_KEY", gKey);
+      else localStorage.removeItem("CHUSYS_GEMINI_KEY");
+      
       closeApiKeyModal();
-      showToast("Key Saved", k ? "DeepSeek API key stored locally." : "API Key cleared.", "success");
+      showToast("API Keys Saved", "Configuration updated for both providers.", "success");
     }
 
     // Seed Data
@@ -1700,13 +1808,11 @@
 
     // Patient Registration Logic
     function openRegistrationModal() {
-      // Populate doctors select
       const docSel = document.getElementById('regDoctor');
       const nurseSel = document.getElementById('regNurse');
       docSel.innerHTML = staffList.filter(s => s.role === 'Doctor').map(d => `<option value="${escapeHtml(d.name)}">${escapeHtml(d.name)} (${escapeHtml(d.dept)})</option>`).join('');
       nurseSel.innerHTML = staffList.filter(s => s.role === 'Nurse').map(n => `<option value="${escapeHtml(n.name)}">${escapeHtml(n.name)} (${escapeHtml(n.dept)})</option>`).join('');
 
-      // Populate Mother select
       const motherSel = document.getElementById('regMotherId');
       motherSel.innerHTML = `<option value="">-- Select Admitted Mother --</option>` +
         patientsList.filter(p => p.gender === 'Female' && !p.isNewborn).map(m => `<option value="${m.id}">${escapeHtml(m.name)} (${m.code})</option>`).join('');
@@ -1817,7 +1923,6 @@
         return matchCat && matchStat && matchSearch;
       });
 
-      // Update KPI Badges
       const opCount = equipmentList.filter(e => e.status === 'Operational').length;
       const repCount = equipmentList.filter(e => e.status === 'Needs Repair').length;
       const maintCount = equipmentList.filter(e => e.status === 'Under Maintenance').length;
@@ -1948,7 +2053,6 @@
         return matchRole && matchStat && matchSearch;
       });
 
-      // Update KPI counters
       const activeCount = staffList.filter(s => s.status === 'Checked In').length;
       const missingCount = staffList.filter(s => s.status === 'Shift Not Checked-In').length;
       const breakCount = staffList.filter(s => s.status === 'On Break').length;
@@ -2162,13 +2266,14 @@
       renderStaff();
       renderEmergencyDispatch();
       logTerminal("🏥 CHUSys Command Platform Initialized & Active.");
+      logTerminal("🔗 Dual AI Provider ready: DeepSeek API & Google Gemma 4 via Gemini API.");
     });
 
     // Expose Functions Globally
     Object.assign(window, {
-      fetchDeepSeekSurgePrediction, executeLocalFallbackPrediction, runSurgePrediction,
-      switchTab, switchDepartment, resetSlidersToDefaults, updateCalculations,
-      openApiKeyModal, closeApiKeyModal, saveApiKey, toggleAdminModeBtn, verifyAdminPin,
+      fetchDeepSeekSurgePrediction, fetchGemmaSurgePrediction, executeLocalFallbackPrediction, runSurgePrediction,
+      switchTab, switchDepartment, resetSlidersToDefaults, updateCalculations, setAiProvider,
+      openApiKeyModal, closeApiKeyModal, saveApiKeys, toggleAdminModeBtn, verifyAdminPin,
       closeAdminPinModal, lockAdminMode, testApiDirectly, testFallbackDirectly, clearConsoleLog,
       filterPatients, filterPatientDept, openPatientModal, closePatientModal,
       openRegistrationModal, closeRegistrationModal, setRegType, autoFillMotherDetails, handleRegistrationSubmit,
